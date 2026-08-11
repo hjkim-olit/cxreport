@@ -22,7 +22,6 @@
   --r:12px; --rs:8px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
 html,body{height:100%}
 body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(135deg,#eef3fc 0%,#f0f4fb 40%,#f5f0fb 100%);color:var(--tx);display:flex;min-height:100vh;font-size:13.5px;-webkit-font-smoothing:antialiased}
 
@@ -84,16 +83,11 @@ aside{width:var(--sb-w);flex-shrink:0;background:linear-gradient(160deg,#1e2d4f 
 .rep-head .kicker{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#8fb0f5;font-weight:700;margin-bottom:8px}
 .rep-head h1{font-size:26px;font-weight:800;letter-spacing:-.6px;margin-bottom:6px}
 .rep-head .period{font-size:12.5px;color:rgba(255,255,255,.7)}
-/* report section nav (Summary/Operation/...) */
-.rep-nav{display:flex;background:#fff;border:1px solid var(--brd);border-radius:12px;overflow:hidden;margin-bottom:28px;box-shadow:var(--sh);position:sticky;top:60px;z-index:50}
-.rep-nav a{flex:1;text-align:center;padding:13px 6px;font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;border-right:1px solid var(--brd);transition:all .15s;white-space:nowrap}
-.rep-nav a:last-child{border-right:none}
-.rep-nav a:hover{background:var(--acc-s);color:var(--acc)}
-.rep-nav a.active{background:linear-gradient(135deg,#3d6fd4,#5a8aec);color:#fff}
-@media(max-width:760px){.rep-nav{overflow-x:auto}.rep-nav a{flex:0 0 auto;padding:11px 14px}}
+.rep-head .chips{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}
+.rhchip{font-size:12px;font-weight:600;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.16);padding:6px 14px;border-radius:20px;color:#dbe6ff}
 
 /* section blocks */
-.sec{margin-bottom:30px;scroll-margin-top:120px}
+.sec{margin-bottom:30px}
 .sec-h{display:flex;align-items:center;gap:11px;margin-bottom:16px;padding-bottom:0}
 .sec-no{font-size:12px;font-weight:800;color:#fff;background:var(--navy);width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;letter-spacing:-.5px}
 .sec-h.teal .sec-no{background:var(--teal)}
@@ -323,17 +317,16 @@ REPORT_HTML['2026-08-w1'] = `
   <div class="kicker">CX팀 Weekly Report</div>
   <h1>2026년 8월 W1</h1>
   <div class="period">Data 기준 · 07.25(토) — 07.31(금)</div>
+  <div class="chips">
+    <span class="rhchip">Summary</span>
+    <span class="rhchip">Operation</span>
+    <span class="rhchip">Issues</span>
+    <span class="rhchip">Escalation</span>
+    <span class="rhchip">VOC</span>
+    <span class="rhchip">Action Items</span>
+    <span class="rhchip">Agenda</span>
+  </div>
 </div>
-
-<nav class="rep-nav">
-  <a href="#s01" class="active">Summary</a>
-  <a href="#s02">Operation</a>
-  <a href="#s03">Issues</a>
-  <a href="#s03">Escalation</a>
-  <a href="#s04">VOC</a>
-  <a href="#s05">Action Items</a>
-  <a href="#s06">Agenda</a>
-</nav>
 
 <!-- 01 EXECUTIVE SUMMARY -->
 <div class="sec" id="s01">
@@ -716,25 +709,6 @@ function openReport(id){
   for(const m in REPORTS){ const f=REPORTS[m].find(r=>r.id===id); if(f){title=f.title;} }
   tbTitle.textContent='주간보고'; tbCrumb.textContent=title;
   window.scrollTo(0,0);
-  initReportNav();
-}
-
-/* 리포트 섹션 탭 스크롤스파이 */
-let repObserver=null;
-function initReportNav(){
-  if(repObserver) repObserver.disconnect();
-  const links=[...document.querySelectorAll('.rep-nav a')];
-  const secs=['s01','s02','s03','s04','s05','s06'].map(id=>document.getElementById(id)).filter(Boolean);
-  if(!links.length||!secs.length) return;
-  repObserver=new IntersectionObserver(entries=>{
-    entries.forEach(en=>{
-      if(en.isIntersecting){
-        const id='#'+en.target.id;
-        links.forEach(a=>a.classList.toggle('active', a.getAttribute('href')===id));
-      }
-    });
-  },{rootMargin:'-118px 0px -70% 0px',threshold:0});
-  secs.forEach(s=>repObserver.observe(s));
 }
 
 /* --- OKR (blank, month select) --- */
