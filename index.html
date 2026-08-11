@@ -22,6 +22,7 @@
   --r:12px; --rs:8px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
 html,body{height:100%}
 body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(135deg,#eef3fc 0%,#f0f4fb 40%,#f5f0fb 100%);color:var(--tx);display:flex;min-height:100vh;font-size:13.5px;-webkit-font-smoothing:antialiased}
 
@@ -45,7 +46,7 @@ aside{width:var(--sb-w);flex-shrink:0;background:linear-gradient(160deg,#1e2d4f 
 .tb-title{font-size:13px;font-weight:700;color:var(--tx)}
 .tb-crumb{font-size:11px;color:var(--muted);font-weight:500}
 .tb-date{font-size:11px;color:var(--muted);font-weight:600}
-.pc{padding:24px 30px 60px;max-width:1120px}
+.pc{padding:24px 40px 60px;max-width:1560px;width:100%}
 
 /* ── PANELS ── */
 .panel{display:none}.panel.on{display:block}
@@ -83,11 +84,16 @@ aside{width:var(--sb-w);flex-shrink:0;background:linear-gradient(160deg,#1e2d4f 
 .rep-head .kicker{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#8fb0f5;font-weight:700;margin-bottom:8px}
 .rep-head h1{font-size:26px;font-weight:800;letter-spacing:-.6px;margin-bottom:6px}
 .rep-head .period{font-size:12.5px;color:rgba(255,255,255,.7)}
-.rep-head .chips{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}
-.rhchip{font-size:11px;font-weight:600;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.16);padding:5px 12px;border-radius:20px;color:#dbe6ff}
+/* report section nav (Summary/Operation/...) */
+.rep-nav{display:flex;background:#fff;border:1px solid var(--brd);border-radius:12px;overflow:hidden;margin-bottom:28px;box-shadow:var(--sh);position:sticky;top:60px;z-index:50}
+.rep-nav a{flex:1;text-align:center;padding:13px 6px;font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;border-right:1px solid var(--brd);transition:all .15s;white-space:nowrap}
+.rep-nav a:last-child{border-right:none}
+.rep-nav a:hover{background:var(--acc-s);color:var(--acc)}
+.rep-nav a.active{background:linear-gradient(135deg,#3d6fd4,#5a8aec);color:#fff}
+@media(max-width:760px){.rep-nav{overflow-x:auto}.rep-nav a{flex:0 0 auto;padding:11px 14px}}
 
 /* section blocks */
-.sec{margin-bottom:30px}
+.sec{margin-bottom:30px;scroll-margin-top:120px}
 .sec-h{display:flex;align-items:center;gap:11px;margin-bottom:16px;padding-bottom:0}
 .sec-no{font-size:12px;font-weight:800;color:#fff;background:var(--navy);width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;letter-spacing:-.5px}
 .sec-h.teal .sec-no{background:var(--teal)}
@@ -317,17 +323,20 @@ REPORT_HTML['2026-08-w1'] = `
   <div class="kicker">CX팀 Weekly Report</div>
   <h1>2026년 8월 W1</h1>
   <div class="period">Data 기준 · 07.25(토) — 07.31(금)</div>
-  <div class="chips">
-    <span class="rhchip">CS 1,188건</span>
-    <span class="rhchip">CSAT 불만족 10.24%</span>
-    <span class="rhchip">CES 3.6점</span>
-    <span class="rhchip">FRT 2분 57초</span>
-    <span class="rhchip">7월 OKR 3.5/5</span>
-  </div>
 </div>
 
+<nav class="rep-nav">
+  <a href="#s01" class="active">Summary</a>
+  <a href="#s02">Operation</a>
+  <a href="#s03">Issues</a>
+  <a href="#s03">Escalation</a>
+  <a href="#s04">VOC</a>
+  <a href="#s05">Action Items</a>
+  <a href="#s06">Agenda</a>
+</nav>
+
 <!-- 01 EXECUTIVE SUMMARY -->
-<div class="sec">
+<div class="sec" id="s01">
   <div class="sec-h teal"><div class="sec-no">01</div><div class="sec-t">EXECUTIVE SUMMARY</div></div>
   <div class="card">
     <div class="pill-h"><span class="dot"></span>📌 이번 주 핵심 요약</div>
@@ -389,7 +398,7 @@ REPORT_HTML['2026-08-w1'] = `
 </div>
 
 <!-- 02 OPERATION -->
-<div class="sec">
+<div class="sec" id="s02">
   <div class="sec-h"><div class="sec-no">02</div><div class="sec-t">CX팀 Weekly 운영 (Operation) 지표</div><div class="sec-note">Data 기준 · 07.25(토) ~ 07.31(금)</div></div>
   <div class="tbl-wrap">
     <table class="t">
@@ -524,19 +533,19 @@ REPORT_HTML['2026-08-w1'] = `
 </div>
 
 <!-- 03 Issues -->
-<div class="sec">
+<div class="sec" id="s03">
   <div class="sec-h"><div class="sec-no">03</div><div class="sec-t">Issues · Escalation</div></div>
   <div class="empty"><span class="ico">✅</span>이번 주 별도 에스컬레이션 이슈 없음</div>
 </div>
 
 <!-- 04 VOC -->
-<div class="sec">
+<div class="sec" id="s04">
   <div class="sec-h"><div class="sec-no">04</div><div class="sec-t">주요 VOC · 고객 인사이트</div></div>
   <div class="empty"><span class="ico">💬</span>이번 주 별도 등록된 주요 VOC 없음 <span style="display:block;font-size:11px;margin-top:6px">(상세 VOC·품질 이슈는 QC·교환반품 월간 리포트에서 관리)</span></div>
 </div>
 
 <!-- 05 Done + Next Week -->
-<div class="sec">
+<div class="sec" id="s05">
   <div class="sec-h blue"><div class="sec-no">05</div><div class="sec-t">이번 주 완료 사항 (Done) · Next Week Action Items</div></div>
 
   <div class="pill-h" style="margin-bottom:12px">✅ Done (이번 주 Action Items)</div>
@@ -608,7 +617,7 @@ REPORT_HTML['2026-08-w1'] = `
 </div>
 
 <!-- 06 Agenda -->
-<div class="sec">
+<div class="sec" id="s06">
   <div class="sec-h pur"><div class="sec-no">06</div><div class="sec-t">이번 주 아젠다 · 팀 운영 현황 보고</div></div>
   <div class="agenda-row">
     <div class="agenda-idx">1</div>
@@ -707,6 +716,25 @@ function openReport(id){
   for(const m in REPORTS){ const f=REPORTS[m].find(r=>r.id===id); if(f){title=f.title;} }
   tbTitle.textContent='주간보고'; tbCrumb.textContent=title;
   window.scrollTo(0,0);
+  initReportNav();
+}
+
+/* 리포트 섹션 탭 스크롤스파이 */
+let repObserver=null;
+function initReportNav(){
+  if(repObserver) repObserver.disconnect();
+  const links=[...document.querySelectorAll('.rep-nav a')];
+  const secs=['s01','s02','s03','s04','s05','s06'].map(id=>document.getElementById(id)).filter(Boolean);
+  if(!links.length||!secs.length) return;
+  repObserver=new IntersectionObserver(entries=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){
+        const id='#'+en.target.id;
+        links.forEach(a=>a.classList.toggle('active', a.getAttribute('href')===id));
+      }
+    });
+  },{rootMargin:'-118px 0px -70% 0px',threshold:0});
+  secs.forEach(s=>repObserver.observe(s));
 }
 
 /* --- OKR (blank, month select) --- */
