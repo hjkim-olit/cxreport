@@ -865,9 +865,43 @@ function openReport(id){
   window.scrollTo(0,0);
 }
 
-/* --- OKR (blank, month select) --- */
+/* --- OKR (7월 실제 데이터 · 그 외 월 공백) --- */
+const OKR_DATA = {
+  '7': {
+    obj: '반복 문의와 운영 손실을 줄여 측정 가능한 CX 성과를 내고, 동시에 재사용 가능한 분석·운영 체계를 자산으로 남긴다.',
+    krs: [
+      {kr:'KR1', brand:'슬룸', text:'사용법 오인 VOC 개선 제안을 7월 최종 과제로 채택하고, 프로젝트 오너·범위·일정을 확정하여 실행 착수한다.', st:'ok'},
+      {kr:'KR2', brand:'슬룸', text:'쿠팡·네이버 스마트스토어 등 자동회수로 반품불가 처리돼야 하나 반품이 진행된 케이스를 분석하고, 방어 가능한 유형을 식별하고 7월 실현 가능한 범위를 확정한다.', st:'no'},
+      {kr:'KR3', brand:'슬룸', text:'교환·반품 분석 리포트와 품질(QC) 이슈(불량·부작용) 리포트의 월간 발행을 재개한다.', st:'ok'},
+      {kr:'KR4', brand:'슬룸, 전 브랜드', text:'리뷰 대시보드 자체 제작 1차 버전을 완성하고, VOC Studio 종료 대응용 싱클리 대체 운영안을 확정한다.', st:'partial'},
+      {kr:'KR5', brand:'얼라인랩, 빌바', text:'얼라인랩·빌바 채널톡 운영 정비를 완료한다.', st:'partial'}
+    ]
+  }
+};
+function okrBadge(st){
+  if(st==='ok') return '<span class="badge b-ok">달성</span>';
+  if(st==='no') return '<span class="badge b-no">미달성</span>';
+  if(st==='partial') return '<span class="badge" style="background:var(--amb-s);color:var(--amb)">일부 달성</span>';
+  return '—';
+}
 function renderOkr(mn){
   document.querySelectorAll('#okrTabs .mtab').forEach(t=>t.classList.toggle('on', t.dataset.om===mn));
+  const d = OKR_DATA[mn];
+  if(d){
+    const rows = d.krs.map(k=>`<tr><td class="brand">${k.kr}</td><td>${k.brand}</td><td class="l">${k.text}</td><td>${okrBadge(k.st)}</td></tr>`).join('');
+    document.getElementById('okrBody').innerHTML = `
+    <div class="obj-box">
+      <div class="obj-lbl">${mn}월 Objective</div>
+      <div class="obj-txt">${d.obj}</div>
+    </div>
+    <div class="tbl-wrap">
+      <table class="t">
+        <thead><tr><th>KR</th><th>관련 브랜드</th><th style="min-width:320px">Key Result 내용</th><th>달성 여부</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+    return;
+  }
   document.getElementById('okrBody').innerHTML = `
     <div class="obj-box">
       <div class="obj-lbl">${mn}월 Objective</div>
