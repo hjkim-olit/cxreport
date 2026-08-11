@@ -188,6 +188,25 @@ table.t tbody tr:hover{background:#f7faff}
 .kpi-cell .k-l{font-size:11px;color:var(--muted);font-weight:600;margin-bottom:8px}
 .kpi-cell .k-v{font-size:22px;font-weight:800;color:var(--lt)}
 
+/* ── 3Q KPI ── */
+.kpi-legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px;margin:4px 0 26px}
+.klg{border-radius:var(--r);padding:16px 18px;text-align:center;border:1px solid transparent;box-shadow:var(--sh)}
+.klg-t{font-size:15px;font-weight:800;margin-bottom:3px;letter-spacing:-.2px}
+.klg-w{font-size:12px;font-weight:700;margin-bottom:9px;opacity:.9}
+.klg-d{font-size:11.5px;font-weight:600;line-height:1.55}
+.klg.t1{background:#fbeaea;border-color:#f0c4c4;color:#c62828}
+.klg.t2{background:#fdf3d6;border-color:#f2dfa0;color:#b45f06}
+.klg.t3{background:#e9f7ef;border-color:#c4e6d3;color:#166534}
+.klg.pr{background:#eaf2f8;border-color:#c9dbef;color:#0d2e4f}
+.klg.pr .klg-t{font-size:13px}
+.klg.pr .klg-d b{color:#c62828}
+.k3-note{font-size:11.5px;color:var(--muted);line-height:1.7;margin:2px 0 22px;padding:0 2px}
+.k3-secbar{display:flex;align-items:center;gap:9px;background:var(--acc-s);border:1px solid #cfe0fb;border-left:4px solid var(--acc);border-radius:var(--r);padding:13px 18px;font-size:15px;font-weight:800;color:var(--navy);margin:34px 0 8px}
+table.t td.tier1{color:#c62828;font-weight:700}
+table.t td.tier2{color:#b45f06;font-weight:700}
+table.t td.tier3{color:#166534;font-weight:700}
+table.t td.tgt{font-weight:700;color:var(--navy)}
+
 @media(max-width:760px){
   aside{width:64px}.sb-brand,.sb-sub,.sb-sep,.sbi span:not(.sbi-ico),.sb-foot{display:none}
   .sbi{justify-content:center;padding:10px 0}.sbi.sub{padding-left:0}
@@ -252,20 +271,155 @@ table.t tbody tr:hover{background:#f7faff}
       <div id="reportBody"></div>
     </div>
 
-    <!-- ============ 3Q KPI (blank) ============ -->
+    <!-- ============ 3Q KPI ============ -->
     <div class="panel" id="panel-kpi3q">
-      <div class="sh"><div><div class="hd">3Q KPI</div><div class="sub-muted">2026년 3분기 핵심 성과 지표</div></div></div>
-      <div class="ph-hero">
-        <div class="ph-ico">🎯</div>
-        <h2>3Q KPI 준비 중</h2>
-        <p>3분기 KPI 목표·실적 내용이 여기에 표시됩니다. 채워야 할 내용을 알려주시면 반영합니다.</p>
-        <div class="ph-note">작성 예정 · 내용 공백</div>
+      <div class="sh"><div><div class="hd">✨ CX팀 KPI METRICS</div><div class="sub-muted">2026년 3분기 핵심 성과 지표</div></div></div>
+
+      <!-- Tier 신호등 -->
+      <div class="kpi-legend">
+        <div class="klg t1">
+          <div class="klg-t">Tier 1</div>
+          <div class="klg-w">비중 50%</div>
+          <div class="klg-d">고객 문의 발생 요인 감소 &amp; 운영 효율화</div>
+        </div>
+        <div class="klg t2">
+          <div class="klg-t">Tier 2</div>
+          <div class="klg-w">비중 25%</div>
+          <div class="klg-d">AI 기반 자동화 KPI<br>Tier 2 달성 → Tier 1 달성 수단</div>
+        </div>
+        <div class="klg t3">
+          <div class="klg-t">Tier 3</div>
+          <div class="klg-w">비중 25%</div>
+          <div class="klg-d">고객 경험 품질 KPI</div>
+        </div>
+        <div class="klg pr">
+          <div class="klg-t">&lt;운영 원칙&gt;</div>
+          <div class="klg-d" style="margin-top:6px">중요도와 달성 여부는 분리 관리<br>모든 KPI는 <b>달성/주의/미달성</b> 으로 별도 모니터링</div>
+        </div>
       </div>
-      <div class="kpi-skel">
-        <div class="kpi-cell"><div class="k-l">KPI 항목 1</div><div class="k-v">—</div></div>
-        <div class="kpi-cell"><div class="k-l">KPI 항목 2</div><div class="k-v">—</div></div>
-        <div class="kpi-cell"><div class="k-l">KPI 항목 3</div><div class="k-v">—</div></div>
-        <div class="kpi-cell"><div class="k-l">KPI 항목 4</div><div class="k-v">—</div></div>
+
+      <!-- 메인 KPI 표 -->
+      <div class="tbl-wrap">
+        <table class="t" style="min-width:1080px">
+          <thead>
+            <tr>
+              <th>Tier</th><th>비중</th><th>기준 브랜드</th><th>KPI명</th><th>KPI 구분</th>
+              <th>목적</th><th style="min-width:190px">정의</th><th style="min-width:200px">산식</th>
+              <th>Target</th><th>리뷰 주기</th><th>성과 판단</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="tier1">Tier 1</td><td>50%</td><td class="brand">슬룸</td>
+              <td class="l">구매 대비 문의 비율(IPV)</td><td>운영 최적화</td>
+              <td class="l">고객 문의 발생 요인 감소</td><td class="l">전체 구매 대비 전체 문의 발생 비율</td>
+              <td class="l">슬룸 전체 문의 수 (ALF 포함) / 슬룸 출고량</td>
+              <td class="tgt">25% 미만</td><td>Monthly</td><td>Monthly + Quarterly</td>
+            </tr>
+            <tr>
+              <td class="tier1">Tier 1</td><td>50%</td><td class="brand">얼라인랩</td>
+              <td class="l">구매 대비 문의 비율(IPV)</td><td>운영 최적화</td>
+              <td class="l">고객 문의 발생 요인 감소</td><td class="l">전체 구매 대비 전체 문의 발생 비율</td>
+              <td class="l">얼라인랩 전체 문의 수 (ALF 포함) / 얼라인랩 출고량</td>
+              <td class="tgt">8% 미만</td><td>Monthly</td><td>Monthly + Quarterly</td>
+            </tr>
+            <tr>
+              <td class="tier2">Tier 2</td><td>25%</td><td class="brand">슬룸</td>
+              <td class="l">채널톡 ALF 해결률</td><td>AI 기반 자동화</td>
+              <td class="l">AI 자동화 효율 관리</td><td class="l">ALF에 인입된 상담 중 ALF가 해결한 문의 비율</td>
+              <td class="l">ALF 해결 건 수 / ALF 관여 수</td>
+              <td class="tgt">90% 이상</td><td>Monthly</td><td>Monthly</td>
+            </tr>
+            <tr>
+              <td class="tier2">Tier 2</td><td>25%</td><td class="brand">슬룸</td>
+              <td class="l">ALF 처리 비율 (전체 상담 대비)</td><td>AI 기반 자동화</td>
+              <td class="l">AI 자동화 효율 관리</td><td class="l">전체 상담 대비 ALF가 해결한 문의 비율</td>
+              <td class="l">ALF 단독 해결 문의 수 / 전체 유입 문의 수</td>
+              <td class="tgt">71% 이상</td><td>Monthly</td><td>Monthly</td>
+            </tr>
+            <tr>
+              <td class="tier3">Tier 3</td><td>25%</td><td class="brand">전 브랜드</td>
+              <td class="l">CSAT</td><td>고객 경험 품질</td>
+              <td class="l">고객 만족도 품질 관리</td><td class="l">상담 고객 만족도 점수 (Customer Satisfaction Score)</td>
+              <td class="l">전 브랜드 CSAT 평균 점수</td>
+              <td class="tgt">4.0</td><td>Monthly</td><td>Monthly</td>
+            </tr>
+            <tr>
+              <td class="tier3">Tier 3</td><td>25%</td><td class="brand">슬룸</td>
+              <td class="l">CES</td><td>고객 경험 품질</td>
+              <td class="l">고객 노력도 관리</td><td class="l">문제 해결 과정에서 고객이 느낀 노력 수준</td>
+              <td class="l">CES 평균 점수</td>
+              <td class="tgt">3.6</td><td>Monthly</td><td>Monthly</td>
+            </tr>
+            <tr>
+              <td class="tier3">Tier 3</td><td>25%</td><td class="brand">전 브랜드</td>
+              <td class="l">QA 점수</td><td>고객 경험 품질</td>
+              <td class="l">상담 품질 관리</td><td class="l">QA 기준에 따른 상담 품질 점수</td>
+              <td class="l">QA 평가 평균 점수</td>
+              <td class="tgt">85점 이상</td><td>Monthly</td><td>Monthly</td>
+            </tr>
+            <tr>
+              <td class="tier3">Tier 3</td><td>25%</td><td class="brand">전 브랜드</td>
+              <td class="l">FRT 평균 10분 이내 달성</td><td>고객 경험 품질</td>
+              <td class="l">응답 속도 관리</td><td class="l">최초 응답 시간 평균 10분 이내 달성 여부</td>
+              <td class="l">첫 응답 시간 (FRT) 평균 값</td>
+              <td class="tgt">10분 미만</td><td>Monthly</td><td>Monthly</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="k3-note">＊ IPV는 월간 리뷰를 통해 이상치와 원인을 점검하되, 개선 액션의 효과는 일정 기간 누적 후 확인이 필요하므로 분기 리뷰에서 최종 판단한다.</div>
+
+      <!-- 주간 운영 선행 지표 트래킹 -->
+      <div class="k3-secbar">🗓️ 주간 운영 선행 지표 트래킹</div>
+      <div class="k3-note">＊ 주간 리스트는 월간 KPI 전체를 주별로 쪼개 보는 용도가 아니라, 매 주 주간 회의에서 바로 점검·조치가 필요한 운영 지표만 별도로 관리하는 리스트임.</div>
+      <div class="tbl-wrap">
+        <table class="t" style="min-width:1020px">
+          <thead>
+            <tr>
+              <th>Tier</th><th>비중</th><th>기준 브랜드</th><th>KPI명</th><th>KPI 구분</th>
+              <th>목적</th><th style="min-width:190px">정의</th><th style="min-width:200px">산식</th>
+              <th>Target</th><th>데이터 출처</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="tier2">Tier 2</td><td>25%</td><td class="brand">슬룸</td>
+              <td class="l">채널톡 ALF 해결률</td><td>AI 기반 자동화</td>
+              <td class="l">AI 자동화 효율 관리</td><td class="l">ALF에 인입된 상담 중 ALF가 해결한 문의 비율</td>
+              <td class="l">ALF 해결 건 수 / ALF 관여 수</td>
+              <td class="tgt">90% 이상</td><td>채널톡 통계</td>
+            </tr>
+            <tr>
+              <td class="tier2">Tier 2</td><td>25%</td><td class="brand">슬룸</td>
+              <td class="l">ALF 처리 비율 (전체 상담 대비)</td><td>AI 기반 자동화</td>
+              <td class="l">AI 자동화 효율 관리</td><td class="l">전체 상담 대비 ALF가 해결한 문의 비율</td>
+              <td class="l">ALF 단독 해결 문의 수 / 전체 유입 문의 수</td>
+              <td class="tgt">71% 이상</td><td>채널톡 통계</td>
+            </tr>
+            <tr>
+              <td class="tier3">Tier 3</td><td>25%</td><td class="brand">전 브랜드</td>
+              <td class="l">CSAT</td><td>고객 경험 품질</td>
+              <td class="l">고객 만족도 품질 관리</td><td class="l">상담 고객 만족도 점수 (Customer Satisfaction Score)</td>
+              <td class="l">전 브랜드 CSAT 평균 점수</td>
+              <td class="tgt">4.0</td><td>채널톡 통계</td>
+            </tr>
+            <tr>
+              <td class="tier3">Tier 3</td><td>25%</td><td class="brand">슬룸</td>
+              <td class="l">CES</td><td>고객 경험 품질</td>
+              <td class="l">고객 노력도 관리</td><td class="l">문제 해결 과정에서 고객이 느낀 노력 수준</td>
+              <td class="l">CES 평균 점수</td>
+              <td class="tgt">3.6</td><td>채널톡 통계 (CES)</td>
+            </tr>
+            <tr>
+              <td class="tier3">Tier 3</td><td>25%</td><td class="brand">전 브랜드</td>
+              <td class="l">FRT 평균 10분 이내 달성</td><td>고객 경험 품질</td>
+              <td class="l">응답 속도 관리</td><td class="l">최초 응답 시간 평균 10분 이내 달성 여부</td>
+              <td class="l">첫 응답 시간 (FRT) 평균 값</td>
+              <td class="tgt">10분 미만</td><td>채널톡 통계</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
