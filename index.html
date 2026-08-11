@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CX팀 주간보고 · 팀 보드</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sb:#1a2236; --sb-w:230px;
+  --bg:#f0f4fb; --surf:#fff; --brd:#dde6f5;
+  --tx:#1a2236; --muted:#6b7a99; --lt:#a8b4cc;
+  --acc:#3d6fd4; --acc-s:#e8effc;
+  --navy:#0f1e3c; --teal:#0f766e; --pur:#7c3aed;
+  --grn:#1e7550; --grn-s:#e5f6ee;
+  --red:#b83030; --red-s:#fde8e4;
+  --amb:#956b00; --amb-s:#fdf4df;
+  --sh:0 2px 12px rgba(61,111,212,.08),0 0 1px rgba(61,111,212,.06);
+  --sh2:0 8px 32px rgba(61,111,212,.14);
+  --r:12px; --rs:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:'Noto Sans KR',sans-serif;background:linear-gradient(135deg,#eef3fc 0%,#f0f4fb 40%,#f5f0fb 100%);color:var(--tx);display:flex;min-height:100vh;font-size:13.5px;-webkit-font-smoothing:antialiased}
+
+/* ── SIDEBAR ── */
+aside{width:var(--sb-w);flex-shrink:0;background:linear-gradient(160deg,#1e2d4f 0%,#162240 60%,#1a2a50 100%);display:flex;flex-direction:column;position:fixed;inset:0 auto 0 0;z-index:300;overflow-y:auto;box-shadow:2px 0 20px rgba(26,34,54,.18)}
+.sb-logo{padding:22px 18px 16px;border-bottom:1px solid rgba(255,255,255,.08);background:linear-gradient(135deg,rgba(61,111,212,.25) 0%,transparent 100%)}
+.sb-brand{font-weight:800;font-size:15px;color:#fff;line-height:1.35;margin-bottom:3px;letter-spacing:-.2px}
+.sb-sub{font-size:9.5px;color:rgba(255,255,255,.38);letter-spacing:1.3px;text-transform:uppercase;font-weight:500}
+.sb-nav{flex:1;padding:10px 9px}
+.sb-sep{font-size:9px;font-weight:700;color:rgba(255,255,255,.28);letter-spacing:1.3px;text-transform:uppercase;padding:14px 10px 5px}
+.sbi{display:flex;align-items:center;gap:8px;padding:8px 11px;border-radius:var(--rs);cursor:pointer;border:none;background:transparent;color:rgba(255,255,255,.55);font-size:12.5px;font-weight:500;width:100%;text-align:left;font-family:inherit;transition:all .18s}
+.sbi:hover{background:rgba(255,255,255,.09);color:rgba(255,255,255,.9)}
+.sbi.on{background:linear-gradient(135deg,#3d6fd4 0%,#5a8aec 100%);color:#fff;box-shadow:0 2px 12px rgba(61,111,212,.4)}
+.sbi-ico{font-size:13px;width:16px;text-align:center;flex-shrink:0}
+.sbi.sub{padding-left:30px;font-size:12px}
+.sb-foot{padding:14px 16px;border-top:1px solid rgba(255,255,255,.06);font-size:10px;color:rgba(255,255,255,.28);text-align:center;line-height:1.6}
+
+/* ── MAIN ── */
+.wrap{margin-left:var(--sb-w);flex:1;display:flex;flex-direction:column;min-height:100vh}
+.topbar{background:rgba(255,255,255,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--brd);min-height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;position:sticky;top:0;z-index:100;box-shadow:0 1px 8px rgba(61,111,212,.06)}
+.tb-title{font-size:13px;font-weight:700;color:var(--tx)}
+.tb-crumb{font-size:11px;color:var(--muted);font-weight:500}
+.tb-date{font-size:11px;color:var(--muted);font-weight:600}
+.pc{padding:24px 30px 60px;max-width:1120px}
+
+/* ── PANELS ── */
+.panel{display:none}.panel.on{display:block}
+
+/* ── HEADINGS ── */
+.hd{font-weight:800;font-size:20px;letter-spacing:-.5px}
+.sub-muted{font-size:12px;color:var(--muted);margin-top:4px}
+.sh{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px}
+
+/* ── MONTH TABS ── */
+.mtabs{display:flex;gap:6px;margin-bottom:22px;flex-wrap:wrap}
+.mtab{padding:7px 16px;font-size:12.5px;font-weight:600;cursor:pointer;border:1px solid var(--brd);background:#fff;color:var(--muted);border-radius:20px;font-family:inherit;transition:all .15s}
+.mtab:hover{border-color:#b8c8e8;color:var(--tx)}
+.mtab.on{background:linear-gradient(135deg,#3d6fd4,#5a8aec);color:#fff;border-color:transparent;box-shadow:0 2px 10px rgba(61,111,212,.32)}
+
+/* ── REPORT CARDS (archive list) ── */
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.rcard{background:var(--surf);border:1px solid var(--brd);border-radius:var(--r);padding:18px 20px;cursor:pointer;box-shadow:var(--sh);transition:all .18s;position:relative;overflow:hidden}
+.rcard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,#3d6fd4,#5a8aec)}
+.rcard:hover{border-color:var(--acc);box-shadow:var(--sh2);transform:translateY(-3px)}
+.rcard-wk{font-size:10px;font-weight:700;letter-spacing:.5px;color:var(--acc);background:var(--acc-s);display:inline-block;padding:3px 9px;border-radius:20px;margin-bottom:10px}
+.rcard-ttl{font-size:15px;font-weight:800;letter-spacing:-.3px;margin-bottom:5px}
+.rcard-meta{font-size:11px;color:var(--muted);line-height:1.7}
+.rcard-arrow{position:absolute;right:16px;bottom:14px;color:var(--lt);font-size:15px;transition:all .18s}
+.rcard:hover .rcard-arrow{color:var(--acc);transform:translateX(3px)}
+
+.empty{background:var(--surf);border:1px dashed var(--brd);border-radius:var(--r);padding:44px 20px;text-align:center;color:var(--lt);font-size:13px}
+.empty .ico{font-size:26px;display:block;margin-bottom:10px;opacity:.7}
+
+/* ── REPORT VIEW ── */
+.rback{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--muted);background:#fff;border:1px solid var(--brd);border-radius:20px;padding:6px 14px;cursor:pointer;font-family:inherit;margin-bottom:18px;transition:all .15s}
+.rback:hover{border-color:var(--acc);color:var(--acc)}
+
+.rep-head{background:linear-gradient(135deg,#0f1e3c 0%,#1a2a50 55%,#22346a 100%);border-radius:16px;padding:26px 30px;color:#fff;margin-bottom:26px;box-shadow:0 10px 30px rgba(15,30,60,.25)}
+.rep-head .kicker{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#8fb0f5;font-weight:700;margin-bottom:8px}
+.rep-head h1{font-size:26px;font-weight:800;letter-spacing:-.6px;margin-bottom:6px}
+.rep-head .period{font-size:12.5px;color:rgba(255,255,255,.7)}
+.rep-head .chips{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}
+.rhchip{font-size:11px;font-weight:600;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.16);padding:5px 12px;border-radius:20px;color:#dbe6ff}
+
+/* section blocks */
+.sec{margin-bottom:30px}
+.sec-h{display:flex;align-items:center;gap:11px;margin-bottom:16px;padding-bottom:0}
+.sec-no{font-size:12px;font-weight:800;color:#fff;background:var(--navy);width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;letter-spacing:-.5px}
+.sec-h.teal .sec-no{background:var(--teal)}
+.sec-h.blue .sec-no{background:var(--acc)}
+.sec-h.pur .sec-no{background:var(--pur)}
+.sec-t{font-size:17px;font-weight:800;letter-spacing:-.3px}
+.sec-note{font-size:11px;color:var(--muted);font-weight:500;margin-left:auto}
+
+.card{background:var(--surf);border:1px solid var(--brd);border-radius:var(--r);padding:20px 22px;box-shadow:var(--sh)}
+.card + .card{margin-top:12px}
+.pill-h{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:700;margin-bottom:12px}
+.pill-h .dot{width:7px;height:7px;border-radius:50%;background:var(--acc)}
+
+/* summary list */
+.sum-list{display:flex;flex-direction:column;gap:14px}
+.sum-item{display:flex;gap:13px}
+.sum-num{flex-shrink:0;width:24px;height:24px;border-radius:7px;background:var(--acc-s);color:var(--acc);font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.sum-body{flex:1}
+.sum-lead{font-size:13.5px;font-weight:700;line-height:1.55;margin-bottom:6px}
+.sum-body ul{list-style:none;display:flex;flex-direction:column;gap:5px}
+.sum-body li{font-size:12.5px;color:#40506e;line-height:1.7;padding-left:14px;position:relative}
+.sum-body li::before{content:"–";position:absolute;left:0;color:var(--lt)}
+.sum-body li b{color:var(--tx);font-weight:700}
+
+/* tables */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--brd);border-radius:var(--r);box-shadow:var(--sh)}
+table.t{width:100%;border-collapse:collapse;font-size:12px;background:#fff;min-width:560px}
+table.t th{background:var(--navy);color:#fff;font-weight:600;padding:9px 11px;text-align:center;white-space:nowrap;font-size:11.5px}
+table.t td{padding:8px 11px;border-bottom:1px solid #eef2f9;border-right:1px solid #eef2f9;text-align:center;color:#33415c;vertical-align:middle}
+table.t td:last-child{border-right:none}
+table.t tr:last-child td{border-bottom:none}
+table.t td.l{text-align:left}
+table.t td.note{text-align:left;color:#6b7a99;font-size:11px;line-height:1.6;white-space:normal}
+table.t tbody tr:hover{background:#f7faff}
+.brand{font-weight:600;color:var(--navy)}
+.dn{color:#c0392b;font-weight:600}.up{color:#1e7550;font-weight:600}
+.badge{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 10px;border-radius:20px}
+.b-ok{background:var(--grn-s);color:var(--grn)}
+.b-no{background:var(--red-s);color:var(--red)}
+.tbl-cap{font-size:12.5px;font-weight:700;margin:22px 0 9px;display:flex;align-items:center;gap:7px}
+.tbl-cap .ic{font-size:14px}
+
+/* comment blocks */
+.cmt h4{font-size:13px;font-weight:800;color:var(--navy);margin:16px 0 8px;padding-left:11px;border-left:3px solid var(--acc)}
+.cmt h5{font-size:12.5px;font-weight:700;margin:12px 0 5px;color:#2b3a57}
+.cmt p{font-size:12.5px;color:#40506e;line-height:1.85;margin-bottom:5px}
+.cmt p.arrow{color:var(--acc);font-weight:600}
+.cmt ul{list-style:none;margin:4px 0 8px}
+.cmt li{font-size:12.5px;color:#40506e;line-height:1.8;padding-left:14px;position:relative}
+.cmt li::before{content:"·";position:absolute;left:3px;color:var(--lt);font-weight:700}
+.cmt .subttl{font-weight:700;color:#2b3a57}
+
+/* done items */
+.done-item{background:var(--surf);border:1px solid var(--brd);border-radius:var(--r);box-shadow:var(--sh);margin-bottom:12px;overflow:hidden}
+.done-top{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid #eef2f9;flex-wrap:wrap}
+.done-idx{width:24px;height:24px;border-radius:7px;background:var(--navy);color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.done-ttl{font-size:13.5px;font-weight:700;flex:1;min-width:200px}
+.done-meta{font-size:11px;color:var(--muted);display:flex;gap:12px;flex-wrap:wrap}
+.st{font-size:10.5px;font-weight:700;padding:3px 11px;border-radius:20px}
+.st-done{background:var(--grn-s);color:var(--grn)}
+.st-ing{background:var(--red-s);color:var(--red)}
+.st-plan{background:var(--amb-s);color:var(--amb)}
+.done-body{padding:14px 18px 16px}
+.okr-tag{font-size:10.5px;font-weight:700;color:var(--grn);background:var(--grn-s);padding:2px 9px;border-radius:20px;display:inline-block;margin-bottom:8px}
+.done-body p{font-size:12px;color:#40506e;line-height:1.8;margin-bottom:4px}
+.done-body .blk-t{font-weight:800;color:#2b3a57;margin:12px 0 4px;font-size:12px}
+.done-body ul{list-style:none;margin:2px 0 6px}
+.done-body li{font-size:12px;color:#40506e;line-height:1.8;padding-left:14px;position:relative}
+.done-body li::before{content:"–";position:absolute;left:0;color:var(--lt)}
+.done-body a{color:var(--acc);font-weight:600;text-decoration:none;word-break:break-all}
+.done-body a:hover{text-decoration:underline}
+
+/* agenda */
+.agenda-row{display:flex;align-items:center;gap:12px;background:var(--surf);border:1px solid var(--brd);border-radius:var(--r);padding:14px 18px;box-shadow:var(--sh);margin-bottom:10px}
+.agenda-idx{width:22px;height:22px;border-radius:6px;background:var(--pur);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.agenda-ttl{flex:1;font-size:13px;font-weight:600}
+.agenda-meta{font-size:11px;color:var(--muted)}
+.prio{font-size:10px;font-weight:700;padding:2px 9px;border-radius:20px;background:var(--red-s);color:var(--red)}
+
+/* objective box */
+.obj-box{background:linear-gradient(135deg,#0f766e0d,#0f766e05);border:1px solid #bfe3dc;border-left:4px solid var(--teal);border-radius:var(--r);padding:16px 20px;margin-bottom:16px}
+.obj-lbl{font-size:10.5px;font-weight:700;letter-spacing:.5px;color:var(--teal);text-transform:uppercase;margin-bottom:5px}
+.obj-txt{font-size:13px;font-weight:600;line-height:1.6;color:#1f3a37}
+
+.callout{background:var(--acc-s);border:1px solid #cfe0fb;border-radius:var(--r);padding:14px 18px;font-size:12.5px;color:#2b3a57;line-height:1.8}
+.callout b{color:var(--navy)}
+
+/* placeholder (blank formats) */
+.ph-hero{background:var(--surf);border:1px solid var(--brd);border-radius:16px;padding:40px 34px;box-shadow:var(--sh);text-align:center;margin-bottom:20px}
+.ph-hero .ph-ico{font-size:34px;margin-bottom:12px}
+.ph-hero h2{font-size:19px;font-weight:800;margin-bottom:8px}
+.ph-hero p{font-size:12.5px;color:var(--muted);line-height:1.7;max-width:460px;margin:0 auto}
+.ph-note{display:inline-block;margin-top:14px;font-size:11px;font-weight:600;color:var(--amb);background:var(--amb-s);padding:5px 13px;border-radius:20px}
+
+/* KPI placeholder table */
+.kpi-skel{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:6px}
+.kpi-cell{background:var(--surf);border:1px dashed var(--brd);border-radius:var(--r);padding:18px;text-align:center}
+.kpi-cell .k-l{font-size:11px;color:var(--muted);font-weight:600;margin-bottom:8px}
+.kpi-cell .k-v{font-size:22px;font-weight:800;color:var(--lt)}
+
+@media(max-width:760px){
+  aside{width:64px}.sb-brand,.sb-sub,.sb-sep,.sbi span:not(.sbi-ico),.sb-foot{display:none}
+  .sbi{justify-content:center;padding:10px 0}.sbi.sub{padding-left:0}
+  .wrap{margin-left:64px}.pc{padding:18px 16px 50px}
+  .rep-head{padding:20px}.rep-head h1{font-size:21px}
+}
+</style>
+</head>
+<body>
+
+<aside>
+  <div class="sb-logo">
+    <div class="sb-brand">올릿 CX팀 보드</div>
+    <div class="sb-sub">CX Team Board</div>
+  </div>
+  <nav class="sb-nav" id="nav">
+    <div class="sb-sep">주간보고</div>
+    <button class="sbi on" data-view="weekly" data-month="2026-08"><span class="sbi-ico">🗓️</span><span>8월</span></button>
+    <button class="sbi" data-view="weekly" data-month="2026-09"><span class="sbi-ico">🗓️</span><span>9월</span></button>
+    <button class="sbi" data-view="weekly" data-month="2026-10"><span class="sbi-ico">🗓️</span><span>10월</span></button>
+
+    <div class="sb-sep">목표</div>
+    <button class="sbi" data-view="kpi3q"><span class="sbi-ico">🎯</span><span>3Q KPI</span></button>
+    <button class="sbi" data-view="okr"><span class="sbi-ico">📈</span><span>OKR</span></button>
+
+    <div class="sb-sep">Monthly 리뷰</div>
+    <button class="sbi" data-view="review" data-rm="7"><span class="sbi-ico">📊</span><span>7월 KPI 달성 리뷰</span></button>
+    <button class="sbi" data-view="review" data-rm="8"><span class="sbi-ico">📊</span><span>8월 KPI 달성 리뷰</span></button>
+    <button class="sbi" data-view="review" data-rm="9"><span class="sbi-ico">📊</span><span>9월 KPI 달성 리뷰</span></button>
+    <button class="sbi" data-view="review" data-rm="10"><span class="sbi-ico">📊</span><span>10월 KPI 달성 리뷰</span></button>
+  </nav>
+  <div class="sb-foot">올릿리테일 · CX팀<br>Weekly Report Archive</div>
+</aside>
+
+<div class="wrap">
+  <div class="topbar">
+    <div><span class="tb-title" id="tbTitle">주간보고 아카이브</span> &nbsp;<span class="tb-crumb" id="tbCrumb"></span></div>
+    <div class="tb-date" id="tbDate"></div>
+  </div>
+
+  <div class="pc">
+
+    <!-- ============ WEEKLY ARCHIVE ============ -->
+    <div class="panel on" id="panel-weekly">
+      <div class="sh">
+        <div>
+          <div class="hd">주간보고 아카이브</div>
+          <div class="sub-muted">CX팀 주차별 주간보고 · 월을 선택하면 해당 월의 보고서가 표시됩니다</div>
+        </div>
+      </div>
+      <div class="mtabs" id="monthTabs">
+        <button class="mtab on" data-month="2026-08">8월</button>
+        <button class="mtab" data-month="2026-09">9월</button>
+        <button class="mtab" data-month="2026-10">10월</button>
+      </div>
+      <div class="rgrid" id="reportList"></div>
+    </div>
+
+    <!-- ============ SINGLE REPORT ============ -->
+    <div class="panel" id="panel-report">
+      <button class="rback" onclick="showWeekly()">← 목록으로</button>
+      <div id="reportBody"></div>
+    </div>
+
+    <!-- ============ 3Q KPI (blank) ============ -->
+    <div class="panel" id="panel-kpi3q">
+      <div class="sh"><div><div class="hd">3Q KPI</div><div class="sub-muted">2026년 3분기 핵심 성과 지표</div></div></div>
+      <div class="ph-hero">
+        <div class="ph-ico">🎯</div>
+        <h2>3Q KPI 준비 중</h2>
+        <p>3분기 KPI 목표·실적 내용이 여기에 표시됩니다. 채워야 할 내용을 알려주시면 반영합니다.</p>
+        <div class="ph-note">작성 예정 · 내용 공백</div>
+      </div>
+      <div class="kpi-skel">
+        <div class="kpi-cell"><div class="k-l">KPI 항목 1</div><div class="k-v">—</div></div>
+        <div class="kpi-cell"><div class="k-l">KPI 항목 2</div><div class="k-v">—</div></div>
+        <div class="kpi-cell"><div class="k-l">KPI 항목 3</div><div class="k-v">—</div></div>
+        <div class="kpi-cell"><div class="k-l">KPI 항목 4</div><div class="k-v">—</div></div>
+      </div>
+    </div>
+
+    <!-- ============ OKR (blank, month select) ============ -->
+    <div class="panel" id="panel-okr">
+      <div class="sh"><div><div class="hd">OKR</div><div class="sub-muted">월별 Objectives & Key Results · 월을 선택하세요</div></div></div>
+      <div class="mtabs" id="okrTabs">
+        <button class="mtab on" data-om="7">7월</button>
+        <button class="mtab" data-om="8">8월</button>
+        <button class="mtab" data-om="9">9월</button>
+        <button class="mtab" data-om="10">10월</button>
+      </div>
+      <div id="okrBody"></div>
+    </div>
+
+    <!-- ============ MONTHLY REVIEW (blank) ============ -->
+    <div class="panel" id="panel-review">
+      <div class="sh"><div><div class="hd" id="revTitle">월 KPI 달성 리뷰</div><div class="sub-muted">월간 KPI 목표 대비 달성 리뷰</div></div></div>
+      <div class="ph-hero">
+        <div class="ph-ico">📊</div>
+        <h2 id="revHero">KPI 달성 리뷰 준비 중</h2>
+        <p>해당 월의 KPI 목표 대비 달성 현황과 리뷰 코멘트가 여기에 표시됩니다. 내용을 알려주시면 채워드립니다.</p>
+        <div class="ph-note">작성 예정 · 내용 공백</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   데이터 인덱스 — 매주 여기에 한 줄만 추가하면 아카이브에 쌓입니다.
+   render 함수는 아래 REPORT_HTML['id'] 를 사용합니다.
+   ========================================================= */
+const REPORTS = {
+  '2026-08': [
+    { id:'2026-08-w1', week:'W1', title:'8월 1주차 주간보고', date:'2026-08-01', period:'07.25(토) ~ 07.31(금)' }
+  ],
+  '2026-09': [],
+  '2026-10': []
+};
+
+const MONTH_LABEL = { '2026-08':'8월', '2026-09':'9월', '2026-10':'10월' };
+
+/* ---- 리포트 본문 (id별) ---- */
+const REPORT_HTML = {};
+REPORT_HTML['2026-08-w1'] = `
+<div class="rep-head">
+  <div class="kicker">CX팀 Weekly Report</div>
+  <h1>2026년 8월 W1</h1>
+  <div class="period">Data 기준 · 07.25(토) — 07.31(금)</div>
+  <div class="chips">
+    <span class="rhchip">CS 1,188건</span>
+    <span class="rhchip">CSAT 불만족 10.24%</span>
+    <span class="rhchip">CES 3.6점</span>
+    <span class="rhchip">FRT 2분 57초</span>
+    <span class="rhchip">7월 OKR 3.5/5</span>
+  </div>
+</div>
+
+<!-- 01 EXECUTIVE SUMMARY -->
+<div class="sec">
+  <div class="sec-h teal"><div class="sec-no">01</div><div class="sec-t">EXECUTIVE SUMMARY</div></div>
+  <div class="card">
+    <div class="pill-h"><span class="dot"></span>📌 이번 주 핵심 요약</div>
+    <div class="sum-list">
+      <div class="sum-item"><div class="sum-num">1</div><div class="sum-body">
+        <div class="sum-lead">핵심 운영 KPI는 전반적으로 안정 유지, CSAT는 목표치 근접 수준까지 개선</div>
+        <ul>
+          <li>이번 주 전체 CS 건수는 <b>1,188건</b>으로 전주 대비 214건 감소, 평균 CPD는 <b>38.3건</b>.</li>
+          <li>슬룸 ALF 해결률 <b>92.20%</b>, ALF 처리 비율 <b>73.10%</b>로 각각 목표치(90%, 71%) 달성 — AI 기반 자동화 운영 안정적 유지.</li>
+          <li>전 브랜드 평균 첫 응답 시간(FRT) <b>2분 57초</b>로 전주 대비 3분 10초 개선, 목표치(10분 이내) 안정적 달성.</li>
+          <li>전 브랜드 CSAT 불만족 비율 <b>10.24%</b>로 전주 11.31% 대비 1.07%p 개선, 다만 목표치(10% 미만) 소폭 미달성.</li>
+        </ul>
+      </div></div>
+      <div class="sum-item"><div class="sum-num">2</div><div class="sum-body">
+        <div class="sum-lead">CSAT 불만족은 슬룸 A/S 정책·접수 프로세스 영향 지속 → 8월 개선 과제로 관리 예정</div>
+        <ul>
+          <li>CSAT 불만족 응답 총 43건 — 브랜드별 슬룸 40건 / 셀올로지 2건 / 얼라인랩 1건.</li>
+          <li>문의 유형별 불량 관련 18건(41.9%)으로 최다, 모두 슬룸에서 발생.</li>
+          <li>슬룸 불만족 중 A/S 품질보증기간 관련 5건, A/S 접수 복잡도·증빙 부담 관련 4건.</li>
+          <li>품질보증기간·A/S 정책 개편 시 반복 VOC 및 CSAT 개선 기대 → 8월 중 A/S 접수 플로우 간소화 및 ALF 톤앤매너 A/B 테스트로 CES·CSAT 동시 개선 추진.</li>
+        </ul>
+      </div></div>
+      <div class="sum-item"><div class="sum-num">3</div><div class="sum-body">
+        <div class="sum-lead">CES는 목표 달성했으나 전주 대비 하락, A/S 접수 단계 부담 완화 필요</div>
+        <ul>
+          <li>이번 주 CES <b>3.6점</b> — 목표 달성이나 전주 대비 0.29점 하락하여 주의 필요.</li>
+          <li>부정 응답(1~2점) 20건 주요 원인: ① 접수 단계 복잡도·증상 선택 어려움 ② 전화 상담 요청 ③ AI 답변 이후에도 상담사 연결 희망.</li>
+          <li>채팅 기반 셀프 A/S 접수 구조의 부담이 CES·CSAT에 동시 영향.</li>
+          <li>구조화 톤 vs 자연스러운 상담형 톤을 각각 테스트하여 점수·코멘트 변화 비교, 개선 방향 검증 예정.</li>
+        </ul>
+      </div></div>
+      <div class="sum-item"><div class="sum-num">4</div><div class="sum-body">
+        <div class="sum-lead">전 브랜드 Syncly 대시보드·리포트 제작은 구현 범위 조정으로 8/13까지 기한 연장</div>
+        <ul>
+          <li>VOC Studio가 7/31부로 종료됨에 따라 채널톡 API 연동 기반 대시보드·리포트를 Syncly로 대체 구현 중.</li>
+          <li>Syncly AI 기능 세팅·구현 가능 범위 확인 과정에서 추가 조정 필요 → 세부 구성 재확인 중.</li>
+          <li>마감 기한을 <b>8/13</b>까지 연장, AI 기능 세팅 완료 후 대시보드 구현·검수 진행 예정.</li>
+        </ul>
+      </div></div>
+      <div class="sum-item"><div class="sum-num">5</div><div class="sum-body">
+        <div class="sum-lead">품질(QC)·교환반품 리포트 2종 완료, SKU/VOC 기반 월간 분석 체계 구축</div>
+        <ul>
+          <li>슬룸 품질(QC) 이슈 리포트, 일반 교환·반품 월간 CX팀 분석 리포트 제작 완료.</li>
+          <li>QC 리포트: 불량 문의 수·실제 불량 확정 비율·SKU/LOT 기준 불량 데이터·반복 상품 VOC·Critical VOC·고객 제안 항목 포함.</li>
+          <li>단순 집계가 아닌 SKU별 주요 VOC·품질 이슈를 정기 공유하고 반복·급증 이슈를 조기 인지하는 구조 마련.</li>
+          <li>교환·반품 리포트: 월별 반품·교환률, 전월 확정 반품률, 유형별 상세, 출고 대비 반품률, 30일 무료체험 반려·전환, 종합 코멘트 포함 → 8월부터 매월 11~12일 정기 발행.</li>
+        </ul>
+      </div></div>
+      <div class="sum-item"><div class="sum-num">6</div><div class="sum-body">
+        <div class="sum-lead">7월 Monthly OKR은 3.5/5 달성으로 마감, 미달성 과제는 8월 이월 관리 예정</div>
+        <ul>
+          <li>7월 OKR 총 5개 KR 중 3개 달성, 1개 일부 달성, 1개 미달성으로 마감.</li>
+          <li>Syncly 대체 운영 체계 구축은 구현 범위 조정으로 일부 달성, 쿠팡·네이버 자동회수 반품불가 케이스 분석은 케파·우선순위 조정으로 미달성.</li>
+          <li>8월 OKR은 전 구성원 원온원 종료 후 개인별 여력·수행 범위·팀 우선순위 반영하여 차주 수요일까지 최종 수립 예정.</li>
+        </ul>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 02 OPERATION -->
+<div class="sec">
+  <div class="sec-h"><div class="sec-no">02</div><div class="sec-t">CX팀 Weekly 운영 (Operation) 지표</div><div class="sec-note">Data 기준 · 07.25(토) ~ 07.31(금)</div></div>
+  <div class="tbl-wrap">
+    <table class="t">
+      <thead><tr><th>기준 브랜드</th><th>지표명</th><th>수치</th><th>전주 대비</th><th>목표치</th><th>상태</th><th style="min-width:220px">비고 · 코멘트</th></tr></thead>
+      <tbody>
+        <tr><td class="brand">전 브랜드</td><td class="l">전체 총 CS건수</td><td><b>1,188</b></td><td class="dn">▼ 214</td><td>-</td><td>-</td><td class="note">① I/B(유선+채팅+콜백) + ② OB(일반+리뷰) + ③ 메일·게시판 + ④ 슬룸 100%환불이벤트 신청 건 (※ ALF 단독 해결 건 미포함)</td></tr>
+        <tr><td class="brand">전 브랜드</td><td class="l">평균 CPD</td><td><b>38.3</b></td><td class="dn">▼ 8.3</td><td>-</td><td>-</td><td class="note">실제 담당자별 처리 현황과 별도로 1인 당 처리 건수</td></tr>
+        <tr><td class="brand">슬룸</td><td class="l">ALF 단독 해결 상담 수</td><td><b>845</b></td><td class="dn">▼ 187</td><td>-</td><td>-</td><td class="note">AI(ALF) 단독 종결 상담</td></tr>
+        <tr><td class="brand">슬룸</td><td class="l">ALF 해결률</td><td><b>92.20%</b></td><td class="dn">▼ 0.10%</td><td>90%</td><td><span class="badge b-ok">달성</span></td><td class="note">-</td></tr>
+        <tr><td class="brand">슬룸</td><td class="l">ALF 처리 비율 (전체 상담 대비)</td><td><b>73.10%</b></td><td class="dn">▼ 0.51%</td><td>71%</td><td><span class="badge b-ok">달성</span></td><td class="note">-</td></tr>
+        <tr><td class="brand">슬룸</td><td class="l">CES (고객 노력 점수)</td><td><b>3.6점</b></td><td class="dn">▼ 0.29점</td><td>3.6점</td><td><span class="badge b-ok">달성</span></td><td class="note">전주 대비 하락 — 주의 관찰</td></tr>
+        <tr><td class="brand">전 브랜드</td><td class="l">CSAT 불만족 비율 (AI CSAT)</td><td><b>10.24%</b></td><td class="up">▼ 1.07%</td><td>10% 미만</td><td><span class="badge b-no">미달성</span></td><td class="note">전주 11.31% 대비 개선, 목표 소폭 미달</td></tr>
+        <tr><td class="brand">전 브랜드</td><td class="l">평균 첫 응답 시간 (FRT)</td><td><b>2분 57초</b></td><td class="up">▼ 3분 10초</td><td>10분</td><td><span class="badge b-ok">달성</span></td><td class="note">First Response Time</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 02-1 상세 운영 지표 -->
+  <div class="tbl-cap"><span class="ic">📊</span> 02-1. 슬룸 콜백 유형별 요청 현황 (Daily)</div>
+  <div class="tbl-wrap">
+    <table class="t">
+      <thead><tr><th>콜백티켓 유형</th><th>7/27 월</th><th>7/28 화</th><th>7/29 수</th><th>7/30 목</th><th>7/31 금</th></tr></thead>
+      <tbody>
+        <tr><td class="l">전화구매</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td class="l">주문취소</td><td>1</td><td>2</td><td>2</td><td>2</td><td>1</td></tr>
+        <tr><td class="l">반품·교환 철회 요청</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+        <tr><td class="l">교환제품_배송일정</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td class="l">반품 환불 일정</td><td>3</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td class="l">오배송·미배송 (배송오류)</td><td>0</td><td>1</td><td>1</td><td>0</td><td>2</td></tr>
+        <tr><td class="l">재회수 요청</td><td>2</td><td>3</td><td>4</td><td>1</td><td>0</td></tr>
+        <tr><td class="l">취소 후 배송·회수 요청</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr style="font-weight:700;background:#f4f8ff"><td class="l">총 합</td><td>7</td><td>7</td><td>7</td><td>4</td><td>3</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tbl-cap"><span class="ic">📊</span> 상위 브랜드별 상담 태그 TOP5 (I/B)</div>
+  <div class="tbl-wrap">
+    <table class="t">
+      <thead><tr><th>브랜드</th><th>상담태그</th><th>총 건수</th><th>전체 I/B 중 비율</th></tr></thead>
+      <tbody>
+        <tr><td class="brand" rowspan="5">슬룸</td><td class="l">불량 / 불량확정</td><td>125</td><td>46.60%</td></tr>
+        <tr><td class="l">불량 / 불량문의</td><td>56</td><td>20.90%</td></tr>
+        <tr><td class="l">반품 / 반품신청</td><td>18</td><td>6.70%</td></tr>
+        <tr><td class="l">유상AS / 유상AS안내</td><td>16</td><td>6.00%</td></tr>
+        <tr><td class="l">유상AS / 유상AS신청</td><td>12</td><td>4.50%</td></tr>
+        <tr><td class="brand" rowspan="4">얼라인랩</td><td class="l">불량 / 불량문의</td><td>14</td><td>48.80%</td></tr>
+        <tr><td class="l">불량 / 불량확정</td><td>11</td><td>34.40%</td></tr>
+        <tr><td class="l">제품 / 사용법</td><td>2</td><td>6.30%</td></tr>
+        <tr><td class="l">교환 / 교환현황확인</td><td>1</td><td>3.13%</td></tr>
+        <tr><td class="brand" rowspan="2">빌바</td><td class="l">불량 / 불량확정</td><td>2</td><td>66.70%</td></tr>
+        <tr><td class="l">반품 / 반품현황확인</td><td>1</td><td>33.30%</td></tr>
+        <tr><td class="brand" rowspan="3">셀올로지</td><td class="l">제품 / 기타문의</td><td>2</td><td>22.20%</td></tr>
+        <tr><td class="l">반품 / 반품신청</td><td>1</td><td>11.10%</td></tr>
+        <tr><td class="l">배송 / 배송일정</td><td>1</td><td>11.10%</td></tr>
+        <tr><td class="brand">닥터맨즈</td><td class="l">불량 / 불량확정</td><td>1</td><td>100.00%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tbl-cap"><span class="ic">📊</span> 전 브랜드 평균 첫 응답 시간 (FRT)</div>
+  <div class="tbl-wrap">
+    <table class="t">
+      <thead><tr><th>브랜드</th><th>7/27 월</th><th>7/28 화</th><th>7/29 수</th><th>7/30 목</th><th>7/31 금</th><th>평균 FRT</th></tr></thead>
+      <tbody>
+        <tr><td class="brand">슬룸</td><td>0:02:00</td><td>0:03:29</td><td>0:01:44</td><td>0:01:32</td><td>0:02:02</td><td><b>0:02:09</b></td></tr>
+        <tr><td class="brand">빌바</td><td>-</td><td>0:04:23</td><td>-</td><td>0:02:04</td><td>-</td><td><b>0:03:14</b></td></tr>
+        <tr><td class="brand">얼라인랩</td><td>0:05:34</td><td>0:02:24</td><td>0:06:34</td><td>0:02:23</td><td>0:01:11</td><td><b>0:03:37</b></td></tr>
+        <tr><td class="brand">셀올로지</td><td>0:05:04</td><td>0:01:55</td><td>-</td><td>0:06:36</td><td>-</td><td><b>0:04:32</b></td></tr>
+        <tr><td class="brand">코코다움</td><td>-</td><td>0:00:16</td><td>-</td><td>-</td><td>0:01:45</td><td><b>0:01:01</b></td></tr>
+        <tr><td class="brand">12 o'clock</td><td>-</td><td>-</td><td>0:01:30</td><td>-</td><td>-</td><td><b>0:01:30</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tbl-cap"><span class="ic">📊</span> 7월 5wk 담당자별 실적 현황 <span style="font-weight:500;color:var(--muted);font-size:11px">(게시판은 개별 집계 불가)</span></div>
+  <div class="tbl-wrap">
+    <table class="t">
+      <thead><tr><th>담당자</th><th>근속</th><th>평균 CPD</th><th>평균 CPH</th><th>타업무 시간</th><th style="min-width:240px">타업무 상세</th></tr></thead>
+      <tbody>
+        <tr><td class="brand">조건</td><td>14M</td><td>18.0</td><td>3.6</td><td>1h</td><td class="note">7/28 1h15m 빌바 비품 구매 / 7/31 15m 슬룸 월간 상품 VOC 리포트</td></tr>
+        <tr><td class="brand">전승리</td><td>12M</td><td>17.0</td><td>3.3</td><td>-</td><td class="note">-</td></tr>
+        <tr><td class="brand">박가영</td><td>10M</td><td>18.2</td><td>4.2</td><td>4h</td><td class="note">7/28 30m 빌바 비품 환불 / 7/29 2h 얼라인랩 채널톡 정비 / 7/31 1h45m 얼라인랩 아티클 정비</td></tr>
+        <tr><td class="brand">허윤선</td><td>5M</td><td>15.6</td><td>4.0</td><td>7h</td><td class="note">싱클리 VOC 대시보드 미팅·작업·제작 (7/27~7/30) / 빌바 비품 환불 / VOC 대시보드 가이드 작성</td></tr>
+        <tr><td class="brand">박혜정</td><td>3M</td><td>12.8</td><td>3.9</td><td>10h15m</td><td class="note">싱클리 VOC 대시보드 미팅·세팅·제작 / 빌바 비품 구매 / CX·CS 템플릿 개편</td></tr>
+        <tr><td class="brand">김예린 (PT)</td><td>5M</td><td>9.0</td><td>3.0</td><td>-</td><td class="note">-</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 지표 코멘트 -->
+  <div class="card" style="margin-top:22px">
+    <div class="pill-h"><span class="dot"></span>📍 지표 Comment</div>
+    <div class="cmt">
+      <h4>[1] KPI 지표 상세 코멘트</h4>
+      <h5>① 전 브랜드 CSAT 불만족 비율 (AI CSAT)</h5>
+      <p>이번 주 CSAT 불만족 비율은 <b>10.24%</b>로 전주 11.31% 대비 1.07%p 개선되었으나 목표치(10% 미만)는 소폭 미달성.</p>
+      <p>불만족 응답은 총 43건 — 슬룸 40건 / 셀올로지 2건 / 얼라인랩 1건. 문의 유형별로는 불량 관련 18건(41.9%)으로 최다이며 모두 슬룸에서 발생.</p>
+      <p class="subttl">a. 슬룸</p>
+      <ul>
+        <li>불만족 40건 중 5건은 A/S 품질보증기간 관련 불만 (① 1년 보증기간 부족 ② 유상 A/S 비용 과도 인지).</li>
+        <li>정책 자체에 대한 불만이 지속 확인 — 검토 중인 품질보증기간·A/S 정책 개편과 직접 연결되는 VOC.</li>
+      </ul>
+      <p class="arrow">→ 정책 개편 시행 시 반복 VOC 및 CSAT 불만족 개선에 긍정적 영향 기대.</p>
+      <ul>
+        <li>이 외 A/S 접수 복잡도·증빙 제출 부담 관련 불만 4건 (사진·영상 증빙 부담, 접수 단계 과다) — CES 저점 원인과 일치.</li>
+      </ul>
+      <p class="arrow">→ 8월 중 CES·CSAT 동시 개선 미니 프로젝트로 A/S 접수 플로우 간소화 및 ALF 톤앤매너 A/B 테스트 진행 예정.</p>
+      <p class="subttl">b. 셀올로지</p>
+      <ul><li>포어샷 제로팩 2차 사전예약이 쿠팡 한정 혜택이라는 점이 ALF에서 안내되지 않아 불만족으로 연결.</li></ul>
+      <p class="arrow">→ 동일 유형 재발 방지를 위해 ALF 지식 디벨롭 진행.</p>
+
+      <h5>② CES (고객 노력 점수)</h5>
+      <p>이번 주 CES는 <b>3.6점</b>으로 목표는 달성했으나 전주 대비 0.29점 하락하여 주의 필요.</p>
+      <ul>
+        <li>부정 응답(1~2점) 20건 원인: ① 접수 단계 복잡도·증상 선택 어려움 ② 전화 상담 요청 ③ AI 답변 후에도 상담사 연결 희망.</li>
+        <li>채팅 기반 셀프 A/S 접수 구조의 부담이 CES·CSAT 두 지표에 동시 영향.</li>
+        <li>업무·개인 영역에서 AI에 익숙하더라도 고객 상담 영역에서는 사람 상담을 기대하는 양상이 슬룸 고객군에서도 확인.</li>
+      </ul>
+      <p class="arrow">→ 구조화 톤 vs 자연스러운 상담형 톤을 각각 A/B 테스트하여 점수·코멘트 변화 비교, 개선 방향 검증 예정.</p>
+
+      <h4>[2] 담당자별 실적 상세 코멘트</h4>
+      <p class="subttl">① 박가영</p>
+      <ul><li>CPH 4.2건으로 팀 내 최상위 처리 효율. 빌바 비품 정리·얼라인랩 채널톡/아티클 정비 등 타업무 4h 병행에도 효율 우수.</li></ul>
+      <p class="subttl">② 허윤선</p>
+      <ul><li>CPH 4.0건, 타업무 병행에도 근속 5개월차 기준 매우 안정적. 운영성 이슈 대응 병행하면서도 안정적 성과 → 향후 프로젝트성 업무 확대 가능.</li></ul>
+      <p class="subttl">③ 전승리</p>
+      <ul><li>타업무 시간을 블락하지 않은 상태로 CS·프로젝트 병행하여 CPH가 상대적으로 낮게 산출. CS 처리량·프로젝트 Due 준수에는 문제 없음.</li></ul>
+      <p class="arrow">→ 차주부터 프로젝트 수행 시간이 확인되면 보정값으로 산입하도록 실적 산정 기준 일부 재조정 예정.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 03 Issues -->
+<div class="sec">
+  <div class="sec-h"><div class="sec-no">03</div><div class="sec-t">Issues · Escalation</div></div>
+  <div class="empty"><span class="ico">✅</span>이번 주 별도 에스컬레이션 이슈 없음</div>
+</div>
+
+<!-- 04 VOC -->
+<div class="sec">
+  <div class="sec-h"><div class="sec-no">04</div><div class="sec-t">주요 VOC · 고객 인사이트</div></div>
+  <div class="empty"><span class="ico">💬</span>이번 주 별도 등록된 주요 VOC 없음 <span style="display:block;font-size:11px;margin-top:6px">(상세 VOC·품질 이슈는 QC·교환반품 월간 리포트에서 관리)</span></div>
+</div>
+
+<!-- 05 Done + Next Week -->
+<div class="sec">
+  <div class="sec-h blue"><div class="sec-no">05</div><div class="sec-t">이번 주 완료 사항 (Done) · Next Week Action Items</div></div>
+
+  <div class="pill-h" style="margin-bottom:12px">✅ Done (이번 주 Action Items)</div>
+
+  <div class="done-item">
+    <div class="done-top"><div class="done-idx">1</div><div class="done-ttl">[전 브랜드] Syncly 대시보드·리포트 제작</div><div class="done-meta"><span>👤 허윤선, 박혜정</span><span>📅 08/13</span></div><span class="st st-ing">🔴 진행중</span></div>
+    <div class="done-body">
+      <span class="okr-tag">✅ 7월 OKR · KR4 해당</span>
+      <div class="blk-t">[진행 상황]</div>
+      <ul>
+        <li>VOC Studio가 7/31부로 종료됨에 따라 채널톡 API 연동 기반 대시보드·리포트를 Syncly로 대체 구현 중.</li>
+        <li>CX팀 활용 VOC·상담·운영 데이터까지 포함, 기존 VOC Studio 화면·리포트 구조를 참고해 제작 중.</li>
+        <li>Syncly AI 기능 세팅·구현 가능 범위 확인 과정에서 추가 조정 필요 → 마감 8/13까지 연장, AI(텍소노미) 세팅 완료 후 구현·검수 예정.</li>
+      </ul>
+      <div class="blk-t">[기대 효과]</div>
+      <ul>
+        <li>VOC Studio 종료 이후에도 채널톡 기반 상담·VOC 데이터를 지속 확인 가능한 대체 운영 체계 마련.</li>
+        <li>반복 VOC·상담 유형·브랜드별 이슈를 보다 쉽게 확인하도록 개선.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="done-item">
+    <div class="done-top"><div class="done-idx">2</div><div class="done-ttl">[슬룸] 품질(QC) 이슈(불량·부작용) 분석 및 월 리포트 제작</div><div class="done-meta"><span>👤 조건</span><span>📅 07/29</span></div><span class="st st-done">🔵 완료</span></div>
+    <div class="done-body">
+      <span class="okr-tag">✅ 7월 OKR · KR3 해당</span>
+      <p>🔗 리포트 링크 : <a href="https://sloomcx.github.io/QC_report/" target="_blank" rel="noopener">https://sloomcx.github.io/QC_report/</a></p>
+      <div class="blk-t">[기대 효과]</div>
+      <ul>
+        <li>SKU별 주요 VOC·품질 이슈를 정기 공유하여 반복·급증 이슈를 조기 인지하는 구조 마련.</li>
+        <li>CX·상품·마케팅 등 유관 부서가 동일 기준·관점으로 제품 VOC 확인 → 상품 개선·상세페이지 보완·고객 커뮤니케이션 개선 활용.</li>
+      </ul>
+      <div class="blk-t">[진행 완료]</div>
+      <ul>
+        <li><b>① 불량 상담 현황 구조화</b> — 전체 불량 문의 수와 실제 불량 확정 비율을 함께 확인, 확정률 대비 문의량 과다 SKU 식별.</li>
+        <li><b>② SKU·LOT 기준 불량 데이터</b> — 주요 SKU 6개 고정 관리 + 유동 반영, LOT별 출고량 대비 실제 불량률 확인.</li>
+        <li><b>③ 반복 상품 VOC 상세</b> — VOC 요약·발생 건수·대응 현황 제공, 유관 부서도 빠르게 파악 가능.</li>
+        <li><b>④ 비불량 반복 VOC 별도 관리</b> — 오인지·사용법 이해 부족·상세페이지 정보 부족 등 검토 자료로 활용.</li>
+        <li><b>⑤ Critical VOC·고객 제안 항목</b> — 주요 이슈 팔로업 및 상품·경험 개선 아이디어로 활용.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="done-item">
+    <div class="done-top"><div class="done-idx">3</div><div class="done-ttl">[슬룸] 일반 교환·반품 월 CX팀 분석 리포트 작성</div><div class="done-meta"><span>👤 전승리</span><span>📅 07/29</span></div><span class="st st-done">🔵 완료</span></div>
+    <div class="done-body">
+      <span class="okr-tag">✅ 7월 OKR · KR3 해당</span>
+      <p>🔗 리포트 링크 : <a href="https://lyrze.github.io/sloom-cx-report/" target="_blank" rel="noopener">https://lyrze.github.io/sloom-cx-report/</a></p>
+      <div class="blk-t">[기대 효과]</div>
+      <ul>
+        <li>단순 교환·반품률뿐 아니라 발생 원인·유형별 비중·집중 SKU를 함께 확인해 개선 우선순위 도출.</li>
+        <li>상품·마케팅·운영 부서가 고객 이탈·비용 발생 요인을 빠르게 인지, 데이터 기반 개선 활용.</li>
+        <li>100%환불이벤트(30일 무료체험) 반품 흐름까지 반영해 일반/이벤트성 반품을 구분한 정확한 반품률 확인.</li>
+      </ul>
+      <div class="blk-t">[진행 완료]</div>
+      <ul>
+        <li>정확한 월간 반품률 산출을 위해 8월부터 매월 11~12일 발행 (예: 8/12에 7월 리포트).</li>
+        <li><b>① 월별 반품·교환률</b> + 100%환불이벤트 반영 전월 확정 반품률 제공.</li>
+        <li><b>② 유형별 상세</b> — 단순변심·불량·사용불만·배송이슈별 비중·주요 사유.</li>
+        <li><b>③ 출고 대비 반품률</b> — 출고 규모 대비 실제 반품 수준 확인.</li>
+        <li><b>④ 30일 무료체험 반려·전환 현황</b> — 반려 고객 및 재인입·재전환 흐름 확인.</li>
+        <li><b>⑤ CX팀 종합 코멘트</b> — 주요 원인 분석·개선 필요 포인트 제공.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pill-h" style="margin:22px 0 12px">📅 Next Week (다음 주 주요 업무 Plan · Action Items)</div>
+  <div class="empty"><span class="ico">🗓️</span>다음 주 Action Items 작성 예정</div>
+</div>
+
+<!-- 06 Agenda -->
+<div class="sec">
+  <div class="sec-h pur"><div class="sec-no">06</div><div class="sec-t">이번 주 아젠다 · 팀 운영 현황 보고</div></div>
+  <div class="agenda-row">
+    <div class="agenda-idx">1</div>
+    <div class="agenda-ttl">[보고] 7월 Monthly OKR 마감 및 8월 이월 과제 운영 방향</div>
+    <span class="prio">🔴 High</span>
+    <div class="agenda-meta">👤 김현지</div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <div class="pill-h"><span class="dot" style="background:var(--teal)"></span>7월 Monthly OKR — <span style="color:var(--teal)">KR 3.5/5 달성</span></div>
+    <div class="obj-box">
+      <div class="obj-lbl">7월 Objective</div>
+      <div class="obj-txt">반복 문의와 운영 손실을 줄여 측정 가능한 CX 성과를 내고, 동시에 재사용 가능한 분석·운영 체계를 자산으로 남긴다.</div>
+    </div>
+    <div class="tbl-wrap">
+      <table class="t">
+        <thead><tr><th>KR</th><th>관련 브랜드</th><th style="min-width:320px">Key Result 내용</th><th>달성 여부</th></tr></thead>
+        <tbody>
+          <tr><td class="brand">KR1</td><td>슬룸</td><td class="l">사용법 오인 VOC 개선 제안을 7월 최종 과제로 채택, 오너·범위·일정 확정 후 실행 착수.</td><td><span class="badge b-ok">달성</span></td></tr>
+          <tr><td class="brand">KR2</td><td>슬룸</td><td class="l">쿠팡·네이버 스마트스토어 자동회수로 반품불가 처리돼야 하나 반품 진행된 케이스 분석, 방어 가능 유형 식별 및 7월 실현 범위 확정.</td><td><span class="badge b-no">미달성</span></td></tr>
+          <tr><td class="brand">KR3</td><td>슬룸</td><td class="l">교환·반품 분석 리포트와 품질(QC) 이슈 리포트의 월간 발행 재개.</td><td><span class="badge b-ok">달성</span></td></tr>
+          <tr><td class="brand">KR4</td><td>슬룸·전 브랜드</td><td class="l">리뷰 대시보드 자체 제작 1차 버전 완성 + VOC Studio 종료 대응용 Syncly 대체 운영안 확정.</td><td><span class="badge" style="background:var(--amb-s);color:var(--amb)">일부 달성</span></td></tr>
+          <tr><td class="brand">KR5</td><td>얼라인랩·빌바</td><td class="l">얼라인랩·빌바 채널톡 운영 정비 완료.</td><td><span class="badge b-ok">달성</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cmt" style="margin-top:18px">
+      <h4>[보고] 7월 Monthly OKR 마감 결과 및 8월 이월 과제 운영 방향</h4>
+      <h5>1) 7월 OKR 마감 결과</h5>
+      <ul>
+        <li>총 5개 KR 중 3개 달성, 1개 일부 달성, 1개 미달성으로 마감.</li>
+        <li>달성 과제: 품질보증기간·A/S 정책 개편 제안, 일반 교환·반품 월간 리포트 발행 재개, 교환·반품/품질(QC) 리포트 월간 발행 재개, 얼라인랩·빌바 채널톡 정비, 리뷰 대시보드 신규 제작 완료 — KPI 개선과 연결 가능한 분석·운영 자산 구축에 집중.</li>
+      </ul>
+      <h5>2) 미달성 과제</h5>
+      <ul>
+        <li>KR2(자동회수 반품불가 케이스 분석)는 7월 내 착수하지 못해 미달성.</li>
+        <li>7월에는 리뷰 대시보드·Syncly 대체안·QC/교환반품 리포트·A/S 정책 개편 등 동시 진행 과제가 많아 팀 케파상 우선순위 조정 필요.</li>
+        <li>자동회수 반품불가 케이스 분석은 8월로 이월, 우선순위·담당자 재배치 후 착수 여부 재검토.</li>
+      </ul>
+      <h5>3) 일부 달성 과제</h5>
+      <ul>
+        <li>KR4 中 Syncly 대체 운영안: AI 기능 세팅·구현 범위 확인 과정에서 조정 필요 → 마감 8/13까지 연장.</li>
+        <li>Syncly 측과 구현 범위 재확인 후 전 브랜드 VOC·상담 리포트 대체 운영 체계 구축 지속.</li>
+      </ul>
+      <h5>4) 8월 운영 방향</h5>
+      <ul>
+        <li>OKR 달성 여부만이 아니라 미달성 원인을 함께 회고하여 우선순위·담당자·리소스 배정 기준 보완.</li>
+        <li>KR2와 같이 운영 손실 방어 과제는 공헌이익·반품률 관리와 직결 → 8월 OKR 또는 별도 프로젝트로 재편성 검토.</li>
+        <li>월 단위 목표 설정 시 실행 가능 범위·팀 케파를 함께 고려해 OKR을 현실적으로 관리.</li>
+        <li>8월 OKR은 전 구성원 원온원 종료 후 확정 — 개인별 여력·수행 범위·팀 우선순위 반영해 차주 수요일까지 최종 수립 예정.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;
+
+/* ============ 뷰 로직 ============ */
+const panels = {
+  weekly: document.getElementById('panel-weekly'),
+  report: document.getElementById('panel-report'),
+  kpi3q:  document.getElementById('panel-kpi3q'),
+  okr:    document.getElementById('panel-okr'),
+  review: document.getElementById('panel-review')
+};
+const tbTitle = document.getElementById('tbTitle');
+const tbCrumb = document.getElementById('tbCrumb');
+
+function setPanel(name){ for(const k in panels) panels[k].classList.toggle('on', k===name); }
+
+/* --- 주간보고 아카이브 --- */
+let curMonth = '2026-08';
+function renderMonth(m){
+  curMonth = m;
+  document.querySelectorAll('#monthTabs .mtab').forEach(t=>t.classList.toggle('on', t.dataset.month===m));
+  const list = REPORTS[m] || [];
+  const box = document.getElementById('reportList');
+  if(!list.length){
+    box.innerHTML = '<div class="empty" style="grid-column:1/-1"><span class="ico">🗓️</span>'+MONTH_LABEL[m]+' 주간보고가 아직 없습니다<span style="display:block;font-size:11px;margin-top:6px">주차별 보고서가 등록되면 여기에 표시됩니다</span></div>';
+    return;
+  }
+  box.innerHTML = list.map(r=>`
+    <div class="rcard" onclick="openReport('${r.id}')">
+      <span class="rcard-wk">${r.week}</span>
+      <div class="rcard-ttl">${r.title}</div>
+      <div class="rcard-meta">📅 보고일 ${r.date}<br>📊 Data 기준 ${r.period}</div>
+      <span class="rcard-arrow">→</span>
+    </div>`).join('');
+}
+function showWeekly(){ setPanel('weekly'); tbTitle.textContent='주간보고 아카이브'; tbCrumb.textContent=MONTH_LABEL[curMonth]; }
+function openReport(id){
+  const body = REPORT_HTML[id];
+  document.getElementById('reportBody').innerHTML = body || '<div class="empty">보고서 내용이 없습니다.</div>';
+  setPanel('report');
+  let title='';
+  for(const m in REPORTS){ const f=REPORTS[m].find(r=>r.id===id); if(f){title=f.title;} }
+  tbTitle.textContent='주간보고'; tbCrumb.textContent=title;
+  window.scrollTo(0,0);
+}
+
+/* --- OKR (blank, month select) --- */
+function renderOkr(mn){
+  document.querySelectorAll('#okrTabs .mtab').forEach(t=>t.classList.toggle('on', t.dataset.om===mn));
+  document.getElementById('okrBody').innerHTML = `
+    <div class="obj-box">
+      <div class="obj-lbl">${mn}월 Objective</div>
+      <div class="obj-txt" style="color:var(--lt)">목표 문장을 여기에 입력하세요.</div>
+    </div>
+    <div class="tbl-wrap">
+      <table class="t">
+        <thead><tr><th>KR</th><th>관련 브랜드</th><th style="min-width:320px">Key Result 내용</th><th>달성 여부</th></tr></thead>
+        <tbody>
+          <tr><td class="brand">KR1</td><td>—</td><td class="l" style="color:var(--lt)">내용 입력 예정</td><td>—</td></tr>
+          <tr><td class="brand">KR2</td><td>—</td><td class="l" style="color:var(--lt)">내용 입력 예정</td><td>—</td></tr>
+          <tr><td class="brand">KR3</td><td>—</td><td class="l" style="color:var(--lt)">내용 입력 예정</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="ph-note" style="margin-top:16px">${mn}월 OKR · 내용 공백 (작성 예정)</div>`;
+}
+
+/* --- Monthly Review (blank) --- */
+function renderReview(mn){
+  document.getElementById('revTitle').textContent = mn+'월 KPI 달성 리뷰';
+  document.getElementById('revHero').textContent = mn+'월 KPI 달성 리뷰 준비 중';
+}
+
+/* --- 사이드바 --- */
+document.getElementById('nav').addEventListener('click', e=>{
+  const btn = e.target.closest('.sbi'); if(!btn) return;
+  document.querySelectorAll('.sbi').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  const v = btn.dataset.view;
+  if(v==='weekly'){ renderMonth(btn.dataset.month); showWeekly(); }
+  else if(v==='kpi3q'){ setPanel('kpi3q'); tbTitle.textContent='목표'; tbCrumb.textContent='3Q KPI'; window.scrollTo(0,0); }
+  else if(v==='okr'){ setPanel('okr'); tbTitle.textContent='목표'; tbCrumb.textContent='OKR'; renderOkr('7'); window.scrollTo(0,0); }
+  else if(v==='review'){ setPanel('review'); tbTitle.textContent='Monthly 리뷰'; tbCrumb.textContent=btn.dataset.rm+'월'; renderReview(btn.dataset.rm); window.scrollTo(0,0); }
+});
+document.getElementById('monthTabs').addEventListener('click', e=>{
+  const t=e.target.closest('.mtab'); if(!t) return;
+  renderMonth(t.dataset.month); tbCrumb.textContent=MONTH_LABEL[t.dataset.month];
+  document.querySelectorAll('.sbi').forEach(b=>b.classList.toggle('on', b.dataset.view==='weekly'&&b.dataset.month===t.dataset.month));
+});
+document.getElementById('okrTabs').addEventListener('click', e=>{
+  const t=e.target.closest('.mtab'); if(!t) return; renderOkr(t.dataset.om);
+});
+
+/* --- init --- */
+(function(){
+  const d=new Date();
+  document.getElementById('tbDate').textContent = d.getFullYear()+'년 '+(d.getMonth()+1)+'월 '+d.getDate()+'일';
+  renderMonth('2026-08'); showWeekly();
+})();
+</script>
+</body>
+</html>
