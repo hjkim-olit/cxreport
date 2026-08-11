@@ -127,6 +127,18 @@ table.t tbody tr:hover{background:#f7faff}
 .badge{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 10px;border-radius:20px}
 .b-ok{background:var(--grn-s);color:var(--grn)}
 .b-no{background:var(--red-s);color:var(--red)}
+.b-wait{background:#eef1f7;color:#6b7a99}
+/* ── Q3/Q4 분기 Objective + KR/KA ── */
+.qobj{border:1px solid var(--brd);border-radius:10px;overflow:hidden;margin-bottom:14px;box-shadow:var(--sh)}
+.qobj-hd{background:linear-gradient(135deg,#1e2d4f,#28406e);color:#fff;font-weight:700;font-size:12.5px;letter-spacing:.3px;padding:9px 15px}
+.qobj-tx{background:#f3f7fd;color:#1f3a5f;font-weight:600;font-size:13px;line-height:1.6;padding:11px 15px}
+.qobj-tx.lt{color:var(--lt)}
+.kra-bar{display:flex;align-items:center;gap:8px;background:var(--navy);color:#fff;font-weight:700;font-size:12.5px;padding:8px 14px;border-radius:8px 8px 0 0}
+.kra-bar::before{content:"";display:inline-block;width:4px;height:13px;background:var(--acc);border-radius:2px}
+.kra-bar+.tbl-wrap{border-radius:0 0 8px 8px;margin-top:0}
+table.t td.krc{background:#fbe9ec;color:#b3325a;font-weight:700}
+table.t tr.ka td{background:#f8fafc;font-size:11.5px;color:#5f6f8c}
+table.t tr.ka td.ka-lbl{text-align:left;color:#8091ae;font-weight:600;white-space:nowrap;padding-left:18px}
 .tbl-cap{font-size:12.5px;font-weight:700;margin:22px 0 9px;display:flex;align-items:center;gap:7px}
 .tbl-cap .ic{font-size:14px}
 
@@ -425,7 +437,7 @@ table.t td.tgt{font-weight:700;color:var(--navy)}
 
     <!-- ============ OKR (blank, month select) ============ -->
     <div class="panel" id="panel-okr">
-      <div class="sh"><div><div class="hd">OKR</div><div class="sub-muted">월별 Objectives & Key Results · 월을 선택하세요</div></div></div>
+      <div class="sh"><div><div class="hd">OKR</div><div class="sub-muted">분기 Objective · 월별 KR/KA · 월을 선택하세요</div></div></div>
       <div class="mtabs" id="okrTabs">
         <button class="mtab on" data-om="7">7월</button>
         <button class="mtab" data-om="8">8월</button>
@@ -865,9 +877,12 @@ function openReport(id){
   window.scrollTo(0,0);
 }
 
-/* --- OKR (7월 실제 데이터 · 그 외 월 공백) --- */
+/* --- OKR --- 7월: 월별 양식(구) / 8~10월: 분기 Objective + KR·KA 양식(신) --- */
+const Q3_OBJ = 'CS 운영 효율과 고객 경험 품질 개선을 통해 문의 비용을 낮추고, 재구매 기반을 강화한다.';
 const OKR_DATA = {
+  // 7월 — 구 양식(월별 Objective, KR 단독, 달성/미달성/일부 달성)
   '7': {
+    fmt:'m',
     obj: '반복 문의와 운영 손실을 줄여 측정 가능한 CX 성과를 내고, 동시에 재사용 가능한 분석·운영 체계를 자산으로 남긴다.',
     krs: [
       {kr:'KR1', brand:'슬룸', text:'사용법 오인 VOC 개선 제안을 7월 최종 과제로 채택하고, 프로젝트 오너·범위·일정을 확정하여 실행 착수한다.', st:'ok'},
@@ -876,20 +891,43 @@ const OKR_DATA = {
       {kr:'KR4', brand:'슬룸, 전 브랜드', text:'리뷰 대시보드 자체 제작 1차 버전을 완성하고, VOC Studio 종료 대응용 싱클리 대체 운영안을 확정한다.', st:'partial'},
       {kr:'KR5', brand:'얼라인랩, 빌바', text:'얼라인랩·빌바 채널톡 운영 정비를 완료한다.', st:'partial'}
     ]
-  }
+  },
+  // 8월 — 신 양식(Q3 Team Objective + KR/KA)
+  '8': {
+    fmt:'q', objLbl:'Q3 Team Objective (O)', obj:Q3_OBJ,
+    krs: [
+      {kr:'KR1', brand:'전 브랜드', text:'CSAT 점수 매 주 4.0점 이상 달성할 수 있도록 개선한다.', st:'wait', kas:[
+        {id:'KA1-1', text:'CSAT 불만족 사유 Top 3를 유형화한다.'},
+        {id:'KA1-2', text:'불만족 비중이 높은 유형에 대한 응대 프로세스 또는 CS 템플릿을 개선한다.'}
+      ]},
+      {kr:'KR2', brand:'슬룸', text:'슬룸 CES를 3.8 이상 유지하고, 고객 노력도를 높이는 원인 2건 이상 개선한다.', st:'wait', kas:[
+        {id:'KA2-1', text:'CES 점수가 낮은 문의 유형 케이스를 분류'},
+        {id:'KA2-2', text:'고객 점수가 낮은 특정 문의 유형 선정 및 고객의 Pain-Point 선정'},
+        {id:'KA2-3', text:'개선 대상 2건 이상을 CS 템플릿/채널톡 로직/프로세스 에 반영'}
+      ]}
+    ]
+  },
+  // 9월 — 신 양식(Q3 동일 Objective, KR/KA 작성 예정)
+  '9':  { fmt:'q', objLbl:'Q3 Team Objective (O)', obj:Q3_OBJ, krs:[] },
+  // 10월 — 신 양식(Q4, Objective 작성 예정)
+  '10': { fmt:'q', objLbl:'Q4 Team Objective (O)', obj:'', krs:[] }
 };
 function okrBadge(st){
   if(st==='ok') return '<span class="badge b-ok">달성</span>';
   if(st==='no') return '<span class="badge b-no">미달성</span>';
   if(st==='partial') return '<span class="badge" style="background:var(--amb-s);color:var(--amb)">일부 달성</span>';
+  if(st==='wait') return '<span class="badge b-wait">대기</span>';
   return '—';
 }
 function renderOkr(mn){
   document.querySelectorAll('#okrTabs .mtab').forEach(t=>t.classList.toggle('on', t.dataset.om===mn));
-  const d = OKR_DATA[mn];
-  if(d){
+  const d = OKR_DATA[mn] || {fmt:'q', objLbl:'Team Objective (O)', obj:'', krs:[]};
+  const body = document.getElementById('okrBody');
+
+  // ── 구 양식 (7월): 월별 Objective + KR 단독 표
+  if(d.fmt==='m'){
     const rows = d.krs.map(k=>`<tr><td class="brand">${k.kr}</td><td>${k.brand}</td><td class="l">${k.text}</td><td>${okrBadge(k.st)}</td></tr>`).join('');
-    document.getElementById('okrBody').innerHTML = `
+    body.innerHTML = `
     <div class="obj-box">
       <div class="obj-lbl">${mn}월 Objective</div>
       <div class="obj-txt">${d.obj}</div>
@@ -902,22 +940,45 @@ function renderOkr(mn){
     </div>`;
     return;
   }
-  document.getElementById('okrBody').innerHTML = `
-    <div class="obj-box">
-      <div class="obj-lbl">${mn}월 Objective</div>
-      <div class="obj-txt" style="color:var(--lt)">목표 문장을 여기에 입력하세요.</div>
-    </div>
+
+  // ── 신 양식 (8~10월): 분기 Objective + KR/KA
+  const objTx = d.obj
+    ? `<div class="qobj-tx">${d.obj}</div>`
+    : `<div class="qobj-tx lt">목표 문장을 여기에 입력하세요.</div>`;
+  const objBlock = `<div class="qobj"><div class="qobj-hd">${d.objLbl}</div>${objTx}</div>`;
+
+  let inner;
+  if(d.krs && d.krs.length){
+    let rows='';
+    d.krs.forEach(k=>{
+      rows += `<tr><td class="krc">${k.kr}</td><td class="brand">${k.brand}</td><td class="l">${k.text}</td><td>${okrBadge(k.st)}</td></tr>`;
+      (k.kas||[]).forEach(a=>{
+        rows += `<tr class="ka"><td></td><td class="ka-lbl">└ ${a.id}</td><td class="l">${a.text}</td><td></td></tr>`;
+      });
+    });
+    inner = `
+    <div class="kra-bar">${mn}월 KR/KA</div>
     <div class="tbl-wrap">
       <table class="t">
-        <thead><tr><th>KR</th><th>관련 브랜드</th><th style="min-width:320px">Key Result 내용</th><th>달성 여부</th></tr></thead>
+        <thead><tr><th>KR</th><th>관련 브랜드</th><th style="min-width:340px">Key Result 내용</th><th>달성 여부</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+  } else {
+    inner = `
+    <div class="kra-bar">${mn}월 KR/KA</div>
+    <div class="tbl-wrap">
+      <table class="t">
+        <thead><tr><th>KR</th><th>관련 브랜드</th><th style="min-width:340px">Key Result 내용</th><th>달성 여부</th></tr></thead>
         <tbody>
-          <tr><td class="brand">KR1</td><td>—</td><td class="l" style="color:var(--lt)">내용 입력 예정</td><td>—</td></tr>
-          <tr><td class="brand">KR2</td><td>—</td><td class="l" style="color:var(--lt)">내용 입력 예정</td><td>—</td></tr>
-          <tr><td class="brand">KR3</td><td>—</td><td class="l" style="color:var(--lt)">내용 입력 예정</td><td>—</td></tr>
+          <tr><td class="krc">KR1</td><td class="brand" style="color:var(--lt)">—</td><td class="l" style="color:var(--lt)">내용 입력 예정</td><td>${okrBadge('wait')}</td></tr>
+          <tr class="ka"><td></td><td class="ka-lbl">└ KA1-1</td><td class="l" style="color:var(--lt)">내용 입력 예정</td><td></td></tr>
         </tbody>
       </table>
     </div>
-    <div class="ph-note" style="margin-top:16px">${mn}월 OKR · 내용 공백 (작성 예정)</div>`;
+    <div class="ph-note" style="margin-top:16px">${mn}월 KR/KA · 작성 예정</div>`;
+  }
+  body.innerHTML = objBlock + inner;
 }
 
 /* --- Monthly Review (blank) --- */
