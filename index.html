@@ -468,6 +468,7 @@ table.t td.tgt{font-weight:700;color:var(--navy)}
    ========================================================= */
 const REPORTS = {
   '2026-08': [
+    { id:'2026-08-w2', week:'W2', title:'8월 2주차 주간보고', date:'2026-08-12', period:'08.01(토) ~ 08.07(금)' },
     { id:'2026-08-w1', week:'W1', title:'8월 1주차 주간보고', date:'2026-08-05', period:'07.25(토) ~ 07.31(금)' }
   ],
   '2026-09': [],
@@ -831,6 +832,257 @@ REPORT_HTML['2026-08-w1'] = `
       </ul>
     </div>
   </div>
+</div>
+`;
+
+REPORT_HTML['2026-08-w2'] = `
+<div class="rep-head">
+  <div class="kicker">CX팀 Weekly Report</div>
+  <h1>2026년 8월 W2</h1>
+  <div class="period">Data 기준 · 08.01(토) — 08.07(금)</div>
+  <div class="chips">
+    <span class="rhchip">Summary</span>
+    <span class="rhchip">Operation</span>
+    <span class="rhchip">Issues</span>
+    <span class="rhchip">Escalation</span>
+    <span class="rhchip">VOC</span>
+    <span class="rhchip">Action Items</span>
+    <span class="rhchip">Agenda</span>
+  </div>
+</div>
+
+<!-- 01 EXECUTIVE SUMMARY -->
+<div class="sec" id="s01">
+  <div class="sec-h teal"><div class="sec-no">01</div><div class="sec-t">EXECUTIVE SUMMARY</div></div>
+  <div class="empty"><span class="ico">✍️</span>작성 중 — 확정 후 업데이트 예정</div>
+</div>
+
+<!-- 02 OPERATION -->
+<div class="sec" id="s02">
+  <div class="sec-h"><div class="sec-no">02</div><div class="sec-t">CX팀 Weekly 운영 (Operation) 지표</div><div class="sec-note">Data 기준 · 08.01(토) ~ 08.07(금)</div></div>
+  <div class="tbl-wrap">
+    <table class="t">
+      <thead><tr><th>기준 브랜드</th><th>지표명</th><th>수치</th><th>전주 대비</th><th>목표치</th><th>상태</th><th style="min-width:220px">비고 · 코멘트</th></tr></thead>
+      <tbody>
+        <tr><td class="brand">전 브랜드</td><td class="l">전체 총 CS건수</td><td><b>1,166</b></td><td class="dn">▼ 22</td><td>-</td><td>-</td><td class="note">① I/B(유선+채팅+콜백) + ② OB(일반+리뷰) + ③ 메일·게시판 + ④ 슬룸 100%환불이벤트 신청 건 (※ ALF 단독 해결 건 미포함)</td></tr>
+        <tr><td class="brand">전 브랜드</td><td class="l">평균 CPD</td><td><b>35.1</b></td><td class="dn">▼ 3.2</td><td>-</td><td>-</td><td class="note">실제 담당자별 처리 현황과 별도로 1인 당 처리 건수</td></tr>
+        <tr><td class="brand">슬룸</td><td class="l">ALF 단독 해결 상담 수</td><td><b>882</b></td><td class="up">▲ 37</td><td>-</td><td>-</td><td class="note">AI(ALF) 단독 종결 상담</td></tr>
+        <tr><td class="brand">슬룸</td><td class="l">ALF 해결률</td><td><b>93.60%</b></td><td class="up">▲ 1.40%</td><td>90% 이상</td><td><span class="badge b-ok">달성</span></td><td class="note">-</td></tr>
+        <tr><td class="brand">슬룸</td><td class="l">ALF 처리 비율 (전체 상담 대비)</td><td><b>77.85%</b></td><td class="up">▲ 4.75%</td><td>71% 이상</td><td><span class="badge b-ok">달성</span></td><td class="note">-</td></tr>
+        <tr><td class="brand">슬룸</td><td class="l">CES (고객 노력 점수)</td><td><b>3.78점</b></td><td class="up">▲ 0.18점</td><td>3.6점</td><td><span class="badge b-ok">달성</span></td><td class="note">전주 대비 상승</td></tr>
+        <tr><td class="brand">전 브랜드</td><td class="l">CSAT (상담 만족도)</td><td><b>4.56</b></td><td class="up">▲ 2.2</td><td>4.0 이상</td><td><span class="badge b-ok">달성</span></td><td class="note">8월부터 채널톡 CSAT 응답 데이터 기준 지표 활용</td></tr>
+        <tr><td class="brand">전 브랜드</td><td class="l">평균 첫 응답 시간 (FRT)</td><td><b>9분 46초</b></td><td class="dn">▲ 3분 10초</td><td>10분 미만</td><td><span class="badge" style="background:var(--amb-s);color:var(--amb)">주의</span></td><td class="note">심플리케어·빌바 일부 지연 — 주의 관찰</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 02-1 상세 운영 지표 -->
+  <div class="tbl-cap"><span class="ic">📊</span> 02-1. 슬룸 콜백 유형별 요청 현황 (Daily)</div>
+  <div class="tbl-wrap">
+    <table class="t">
+      <thead><tr><th>콜백티켓 유형</th><th>8/3 월</th><th>8/4 화</th><th>8/5 수</th><th>8/6 목</th><th>8/7 금</th></tr></thead>
+      <tbody>
+        <tr><td class="l">전화구매</td><td>0</td><td>2</td><td>2</td><td>1</td><td>1</td></tr>
+        <tr><td class="l">주문취소</td><td>4</td><td>2</td><td>2</td><td>0</td><td>0</td></tr>
+        <tr><td class="l">반품·교환 철회 요청</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+        <tr><td class="l">교환제품_배송일정</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td class="l">반품 환불 일정</td><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+        <tr><td class="l">오배송·미배송 (배송오류)</td><td>0</td><td>0</td><td>2</td><td>0</td><td>0</td></tr>
+        <tr><td class="l">재회수 요청</td><td>2</td><td>3</td><td>2</td><td>3</td><td>1</td></tr>
+        <tr><td class="l">취소 후 배송·회수 요청</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr style="font-weight:700;background:#f4f8ff"><td class="l">총 합</td><td>7</td><td>9</td><td>8</td><td>6</td><td>2</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tbl-cap"><span class="ic">📊</span> 전 브랜드 평균 첫 응답 시간 (FRT) <span style="font-weight:500;color:var(--muted);font-size:11px">(First Response Time)</span></div>
+  <div class="tbl-wrap">
+    <table class="t">
+      <thead><tr><th>브랜드</th><th>8/3 월</th><th>8/4 화</th><th>8/5 수</th><th>8/6 목</th><th>8/7 금</th><th>평균 FRT</th></tr></thead>
+      <tbody>
+        <tr><td class="brand">슬룸</td><td>0:03:07</td><td>0:01:45</td><td>0:06:13</td><td>0:01:24</td><td>0:01:57</td><td><b>0:02:53</b></td></tr>
+        <tr><td class="brand">빌바</td><td>0:55:40</td><td>-</td><td>-</td><td>-</td><td>0:44:21</td><td><b>0:50:01</b></td></tr>
+        <tr><td class="brand">얼라인랩</td><td>0:11:29</td><td>0:03:55</td><td>0:06:30</td><td>0:02:24</td><td>0:05:35</td><td><b>0:05:59</b></td></tr>
+        <tr><td class="brand">심플리케어</td><td>-</td><td>-</td><td>0:33:47</td><td>0:01:50</td><td>0:10:22</td><td><b>-</b></td></tr>
+        <tr><td class="brand">셀올로지</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><b>-</b></td></tr>
+        <tr><td class="brand">코코다움</td><td>-</td><td>-</td><td>0:02:53</td><td>-</td><td>-</td><td><b>0:02:53</b></td></tr>
+        <tr><td class="brand">12 o'clock</td><td>0:00:25</td><td>0:00:18</td><td>0:09:09</td><td>-</td><td>-</td><td><b>0:03:17</b></td></tr>
+        <tr><td class="brand">닥터맨즈</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><b>-</b></td></tr>
+        <tr><td class="brand">닥터아망</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><b>-</b></td></tr>
+        <tr><td class="brand">와이브닝</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><b>-</b></td></tr>
+        <tr><td class="brand">마넬</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><b>-</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tbl-cap"><span class="ic">📊</span> 상위 브랜드별 상담 태그 TOP5 (I/B)</div>
+  <div class="tbl-wrap">
+    <table class="t">
+      <thead><tr><th>브랜드</th><th>상담태그</th><th>총 건수</th><th>전체 I/B 중 비율</th></tr></thead>
+      <tbody>
+        <tr><td class="brand" rowspan="5">슬룸</td><td class="l">불량 / 불량확정</td><td>99</td><td>45.40%</td></tr>
+        <tr><td class="l">불량 / 불량문의</td><td>43</td><td>19.70%</td></tr>
+        <tr><td class="l">유상AS / 유상AS신청</td><td>14</td><td>6.40%</td></tr>
+        <tr><td class="l">반품 / 반품신청</td><td>13</td><td>6.00%</td></tr>
+        <tr><td class="l">반품 / 회수재신청</td><td>11</td><td>5.00%</td></tr>
+        <tr><td class="brand" rowspan="5">얼라인랩</td><td class="l">불량 / 불량문의</td><td>23</td><td>39.00%</td></tr>
+        <tr><td class="l">불량 / 불량확정</td><td>22</td><td>37.30%</td></tr>
+        <tr><td class="l">교환 / 교환신청방법</td><td>3</td><td>5.10%</td></tr>
+        <tr><td class="l">유상 / 유상AS문의</td><td>2</td><td>3.28%</td></tr>
+        <tr><td class="l">교환 / 교환현황확인</td><td>2</td><td>3.28%</td></tr>
+        <tr><td class="brand" rowspan="3">빌바</td><td class="l">반품 / 회수재신청</td><td>1</td><td>33.30%</td></tr>
+        <tr><td class="l">결제취소 / 카드승인취소</td><td>1</td><td>33.30%</td></tr>
+        <tr><td class="l">Critical_Keyword</td><td>1</td><td>33.30%</td></tr>
+        <tr><td class="brand">닥터맨즈</td><td class="l">주문 / 주문취소</td><td>1</td><td>100.00%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tbl-cap"><span class="ic">📊</span> 8월 1wk 담당자별 실적 현황 <span style="font-weight:500;color:var(--muted);font-size:11px">(게시판은 개별 집계 불가)</span></div>
+  <div class="tbl-wrap">
+    <table class="t">
+      <thead><tr><th>담당자</th><th>근속</th><th style="min-width:200px">담당 브랜드</th><th>평균 CPD</th><th>평균 CPH</th><th>타업무 시간</th><th style="min-width:240px">타업무 상세</th></tr></thead>
+      <tbody>
+        <tr><td class="brand">조건</td><td>14M</td><td class="note">슬룸, 얼라인랩, 셀올로지, 닥터아망, 와이브닝, 닥터맨즈</td><td>15.0</td><td>3.2</td><td>-</td><td class="note">-</td></tr>
+        <tr><td class="brand">전승리</td><td>12M</td><td class="note">슬룸, 얼라인랩, 셀올로지, 닥터아망, 와이브닝, 닥터맨즈</td><td>17.5</td><td>3.7</td><td>3h 15m</td><td class="note">8/5 1h45m 쿠팡 리뷰 추출(대시보드 분석용) / 8/7 1h30m 1on1</td></tr>
+        <tr><td class="brand">박가영</td><td>11M</td><td class="note">슬룸, 심플리케어, 빌바, 코코다움, 12 o'clock, 마넬</td><td>18.8</td><td>3.7</td><td>-</td><td class="note">-</td></tr>
+        <tr><td class="brand">허윤선</td><td>5M</td><td class="note">슬룸, 심플리케어, 빌바, 코코다움, 12 o'clock, 마넬</td><td>12.5</td><td>2.6</td><td>1h 45m</td><td class="note">8/3 1h30m 1on1 / 8/5 15m 반출 3건 확인</td></tr>
+        <tr><td class="brand">박혜정</td><td>3M</td><td class="note">슬룸, 심플리케어, 빌바, 코코다움, 12 o'clock, 마넬</td><td>11.6</td><td>3.0</td><td>8h</td><td class="note">8/3 3h CS템플릿 개편(채널톡 매크로 정비) / 8/4 2h CS템플릿 개편(슬룸 외 브랜드 AS) / 8/5 1h45m CS템플릿 개편(슬룸 외 브랜드) / 8/6 30m 셀올로지 신제품 2 SKU 교육 / 8/7 45m 불만성 CS 처리·확인(빌바·슬룸)</td></tr>
+        <tr><td class="brand">김예린 (PT)</td><td>5M</td><td class="note">슬룸</td><td>9.8</td><td>3.3</td><td>-</td><td class="note">-</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 지표 코멘트 -->
+  <div class="card" style="margin-top:22px">
+    <div class="pill-h"><span class="dot"></span>📍 지표 Comment</div>
+    <div class="cmt">
+      <h4>[1] KPI 지표 상세 코멘트</h4>
+      <h5>① CSAT (상담 고객 만족도 점수 · Customer Satisfaction Score)</h5>
+      <ul>
+        <li>VOC Studio 종료에 따라 8월부터 채널톡 CSAT 응답 데이터를 기준 지표로 활용 예정.</li>
+        <li>이번 주 CSAT는 전주 2.36점 → <b>4.56점</b>으로 2.2점 상승했으나, 전체 CSAT는 브랜드별 평균을 단순 평균한 값으로 소표본 브랜드의 저점 제외 효과가 일부 반영된 것으로 확인.</li>
+        <li>전주에는 셀올로지 응답 1건(1점)이 전체 평균을 낮추는 요인이었으나, 금주 해당 저점이 제외되며 지표가 큰 폭 상승.</li>
+        <li>실제 응답 비중이 높은 슬룸 기준으로는 CSAT 3.95점 → 4.17점으로 완만하게 상승, 1점 응답이 8건 → 3건으로 감소한 점이 실질적 개선 요인으로 판단.</li>
+      </ul>
+      <p class="subttl">a. 상세 구간 분포</p>
+      <ul>
+        <li>불만 응답(1~2점): 17.8% → 12.5%로 5.3%p 감소.</li>
+        <li>아쉬움 응답(3점): 13.7% → 9.4%로 4.3%p 감소.</li>
+        <li>만족 응답(4~5점): 68.5% → 78.1%로 9.6%p 상승.</li>
+      </ul>
+      <p class="arrow">→ 만족 아님(3점 이하) 응답이 31.5% → 21.9%로 9.6%p 감소하며 전반적 만족도 개선 흐름 확인.</p>
+
+      <h5>② 평균 첫 응답 시간 (FRT)</h5>
+      <p>현재 CX팀은 A/B 그룹으로 브랜드를 분리하여 운영 중.</p>
+      <ul>
+        <li><b>A그룹</b> (슬룸, 심플리케어, 빌바, 코코다움, 12 o'clock, 마넬) : 박가영, 허윤선, 박혜정</li>
+        <li><b>B그룹</b> (슬룸, 얼라인랩, 셀올로지, 닥터아망, 와이브닝, 닥터맨즈) : 조건, 전승리</li>
+      </ul>
+      <p>금주 지표 확인 결과 A그룹 담당 브랜드인 심플리케어·빌바에서 일부 FRT 미달 사례가 확인됨. 전주 대비 평균 FRT가 3분 10초 상승하여 주의가 필요하며, 주요 원인은 아래 3가지.</p>
+      <p class="subttl">1) 오픈 직후 슬룸 우선 처리로 인한 타 브랜드 응답 지연</p>
+      <ul>
+        <li>8/3 얼라인랩(B그룹), 8/5 심플리케어(33분 47초)에서 응답 지연 발생.</li>
+        <li>오픈 직후 대기 중인 슬룸 외 브랜드를 우선 처리해야 하나, 슬룸 상담을 우선 처리하며 일부 브랜드 응답이 지연된 것으로 확인.</li>
+      </ul>
+      <p class="subttl">2) 점심시간 교대 공백</p>
+      <ul>
+        <li>8/3 빌바에서 55분 40초 응답 지연 발생.</li>
+        <li>점심시간 이후 상담 재개 타이밍에 응대가 지연된 케이스 → 점심시간 교대·복귀 직후 응대 기준 보완 필요.</li>
+      </ul>
+      <p class="subttl">3) 특정 인원에게 VOC 동시 인입</p>
+      <ul>
+        <li>8/7 빌바·심플리케어 상담 2건이 박혜정 1명에게 동시 배정.</li>
+        <li>두 건 모두 불만 제기 상담으로 응대 시간이 길어졌으나, A그룹 내 재배분이 즉시 이루어지지 않아 응답 지연 발생.</li>
+      </ul>
+
+      <h4>[2] 담당자별 실적 상세 코멘트</h4>
+      <p class="subttl">① 박가영</p>
+      <ul>
+        <li>평균 CPD 18.8건, CPH 3.7건으로 주요 처리 지표 최상위권.</li>
+        <li>5일 만근 기준 안정적 처리량 유지, 타업무 시간이 적었던 만큼 핵심 상담 처리 인력으로 기여.</li>
+      </ul>
+      <p class="subttl">② 전승리</p>
+      <ul>
+        <li>4일 근무(8/6 휴무) 기준 평균 CPD 17.5건, CPH 3.7건으로 안정적 처리 효율.</li>
+        <li>근무일 수가 적었음에도 시간당 처리 효율 상위권, CS·프로젝트 병행 관점에서도 안정적 기여도 확인.</li>
+      </ul>
+      <p class="subttl">③ 허윤선</p>
+      <ul>
+        <li>CPH 2.6건으로 팀 내 가장 낮게 확인.</li>
+        <li>월요일 자동 상담 종료 기능이 OFF된 상태였고, 최대 수신 5건 구조에서 오전 인입 상담의 수동 종료가 지연되며 오후 시간대 추가 상담 수신량이 감소한 것으로 확인.</li>
+        <li>상담 처리 역량보다는 상담 종료 관리 방식에 따른 수신량 저하로 판단 → 상담 수동 종료 시간을 평균 2~3시간 내외로 관리하도록 피드백 진행.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 03 Issues -->
+<div class="sec" id="s03">
+  <div class="sec-h"><div class="sec-no">03</div><div class="sec-t">Issues · Escalation</div></div>
+  <div class="empty"><span class="ico">✅</span>이번 주 별도 에스컬레이션 이슈 없음</div>
+</div>
+
+<!-- 04 VOC -->
+<div class="sec" id="s04">
+  <div class="sec-h"><div class="sec-no">04</div><div class="sec-t">주요 VOC · 고객 인사이트</div></div>
+  <div class="empty"><span class="ico">💬</span>이번 주 별도 등록된 주요 VOC 없음 <span style="display:block;font-size:11px;margin-top:6px">(상세 VOC·품질 이슈는 QC·교환반품 월간 리포트에서 관리)</span></div>
+</div>
+
+<!-- 05 Done + Next Week -->
+<div class="sec" id="s05">
+  <div class="sec-h blue"><div class="sec-no">05</div><div class="sec-t">이번 주 완료 사항 (Done) · Next Week Action Items</div></div>
+
+  <div class="pill-h" style="margin-bottom:12px">✅ Done (이번 주 Action Items)</div>
+
+  <div class="done-item">
+    <div class="done-top"><div class="done-idx">1</div><div class="done-ttl">[A그룹] FRT 개선 Action</div><div class="done-meta"><span>👤 박가영, 김현지</span><span>📅 08/12</span></div><span class="st st-done">🔵 완료</span></div>
+    <div class="done-body">
+      <div class="blk-t">[진행 배경]</div>
+      <ul>
+        <li>A그룹 담당 브랜드인 심플리케어·빌바 등에서 일부 FRT 미달 사례가 확인됨.</li>
+        <li>운영 시작 직후 및 점심시간 직후 슬룸 상담이 우선 처리되며, 슬룸 외 브랜드 응대가 후순위로 밀리는 케이스 발생.</li>
+        <li>A그룹 내 슬룸 외 브랜드 응대 우선순위와 실시간 알림 체계를 보완하여 FRT 지연을 방지하고자 함.</li>
+      </ul>
+      <div class="blk-t">[적용 내용]</div>
+      <ul>
+        <li>운영 브랜드: 슬룸, 심플리케어, 빌바, 코코다움, 12 o'clock, 마넬 / 담당자: 박가영, 허윤선, 박혜정</li>
+        <li><b>① 상담 Open 알림 체계 보완</b> — 채널톡 내부대화에서 상담 Open 시 @A그룹 전체 태그로 알림이 활성화되도록 설정. 특정 담당자가 즉시 확인하지 못하더라도 그룹 내에서 상담 인입을 빠르게 인지하도록 보완.</li>
+        <li><b>② 운영 시작·점심 직후 우선 응대 담당자 지정</b> — 슬룸 외 브랜드가 후순위로 밀리지 않도록 우선 응대 담당자 지정 (A그룹: 박가영 / B그룹: 전승리).</li>
+      </ul>
+      <div class="blk-t">[기대 효과]</div>
+      <ul>
+        <li>슬룸 외 브랜드 상담 인입 시 초기 응답 지연 방지.</li>
+        <li>운영 시작 직후 및 점심시간 직후 FRT 미달 리스크 감소.</li>
+        <li>특정 담당자에게 상담이 집중되는 경우에도 그룹 단위로 빠르게 인지·대응하는 운영 구조 마련.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pill-h" style="margin:22px 0 12px">📅 Next Week (다음 주 주요 업무 Plan · Action Items)</div>
+
+  <div class="done-item">
+    <div class="done-top"><div class="done-idx">1</div><div class="done-ttl">[슬룸] 목마사지베개 V2 전원 미종료 VOC 지속 취합 및 추가 반출 검증</div><div class="done-meta"><span>👤 CX팀 전원</span><span>📅 ~8월 지속</span></div><span class="st st-ing">🔴 진행중</span></div>
+    <div class="done-body">
+      <div class="blk-t">[진행 내용]</div>
+      <ul>
+        <li>목마사지베개 V2 전원 미종료 관련 VOC가 지속 접수되고 있어, 동일 유형 문의 및 반출 케이스를 지속 취합 중.</li>
+        <li>최근 반출 건 중 고객 제공 영상에서는 전원이 종료되지 않는 것처럼 확인되었으나, 실제 제품 반출 후 검수 시 정상 종료되는 케이스가 일부 확인됨.</li>
+        <li>8월 중 동일 유형 VOC 지속 모니터링 및 추가 반출을 통해 제품 이슈 여부와 고객 사용 환경·사용 방식 문제 가능성을 함께 검토 예정.</li>
+      </ul>
+      <div class="blk-t">[기대 효과]</div>
+      <ul>
+        <li>전원 미종료 VOC의 실제 불량 여부 및 반복 발생 패턴 확인.</li>
+        <li>향후 제품 개선, 사용법 안내, FAQ·ALF 지식 보완 필요 여부 판단에 활용.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 06 Agenda -->
+<div class="sec" id="s06">
+  <div class="sec-h pur"><div class="sec-no">06</div><div class="sec-t">이번 주 아젠다 · 팀 운영 현황 보고</div></div>
+  <div class="empty"><span class="ico">✍️</span>작성 중 — 확정 후 업데이트 예정</div>
 </div>
 `;
 
