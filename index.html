@@ -468,6 +468,7 @@ table.t td.tgt{font-weight:700;color:var(--navy)}
    ========================================================= */
 const REPORTS = {
   '2026-08': [
+    { id:'2026-08-w3', week:'W3', title:'8월 3주차 주간보고', date:'2026-08-19', period:'08.08(토) ~ 08.14(금)' },
     { id:'2026-08-w2', week:'W2', title:'8월 2주차 주간보고', date:'2026-08-12', period:'08.01(토) ~ 08.07(금)' },
     { id:'2026-08-w1', week:'W1', title:'8월 1주차 주간보고', date:'2026-08-05', period:'07.25(토) ~ 07.31(금)' }
   ],
@@ -1321,6 +1322,353 @@ REPORT_HTML['2026-08-w2'] = `
       </ul>
     </div>
   </div>
+</div>
+`;
+
+REPORT_HTML['2026-08-w3'] = `
+<div class="rep-head">
+  <div class="kicker">CX팀 Weekly Report</div>
+  <h1>2026년 8월 W3</h1>
+  <div class="period">Data 기준 · 08.08(토) — 08.14(금)</div>
+  <div class="chips">
+    <span class="rhchip">Summary</span>
+    <span class="rhchip">Operation</span>
+    <span class="rhchip">Issues</span>
+    <span class="rhchip">Escalation</span>
+    <span class="rhchip">VOC</span>
+    <span class="rhchip">Action Items</span>
+    <span class="rhchip">Agenda</span>
+  </div>
+</div>
+
+<!-- 01 EXECUTIVE SUMMARY -->
+<div class="sec" id="s01">
+  <div class="sec-h teal"><div class="sec-no">01</div><div class="sec-t">EXECUTIVE SUMMARY</div></div>
+  <div class="card">
+    <div class="pill-h"><span class="dot"></span>📌 이번 주 핵심 요약</div>
+    <div class="sum-list">
+      <div class="sum-item"><div class="sum-num">1</div><div class="sum-body">
+        <div class="sum-lead">핵심 운영 KPI는 대부분 목표 달성, 다만 CES는 불량 A/S 접수 경험 영향으로 미달성</div>
+        <ul>
+          <li>이번 주 전체 CS 건수는 <b>1,252건</b>으로 전주 대비 86건 증가하였으나, 평균 CPD는 <b>33.2건</b>으로 전주 대비 1.9건 감소함.</li>
+          <li>슬룸 ALF 단독 해결 상담 수는 <b>912건</b>으로 전주 대비 30건 증가하였으며, ALF 해결률 <b>92.20%</b>·ALF 처리 비율 <b>75.37%</b>로 각각 목표치(90% 이상, 71% 이상)를 달성함.</li>
+          <li>전 브랜드 평균 첫 응답 시간(FRT)은 <b>2분 25초</b>로 전주 대비 7분 21초 단축되며 목표치(10분 미만)를 안정적으로 달성함.</li>
+          <li>CSAT는 <b>4.28점</b>으로 목표치(4.0점 이상)를 달성하였으나, CES는 <b>3.55점</b>으로 목표치(3.6점)를 소폭 미달성하여 불량 A/S 접수 과정 개선이 필요함.</li>
+        </ul>
+      </div></div>
+      <div class="sum-item"><div class="sum-num">2</div><div class="sum-body">
+        <div class="sum-lead">CSAT는 목표 달성했으나, 슬룸 기준으로는 불량 A/S 접수 프로세스 영향 확인</div>
+        <ul>
+          <li>이번 주 CSAT는 4.28점으로 목표치를 달성했으나, 전주 4.56점 대비 0.28점 하락함.</li>
+          <li>얼라인랩 5점 응답 3건이 전체 평균을 일부 견인한 것으로 보이며, 주요 볼륨을 차지하는 슬룸 기준 CSAT는 3.89점으로 전주 4.17점 대비 하락함.</li>
+          <li>슬룸의 경우 1점 응답 비중이 3.0% → 10.8%로 증가했으며, 저점 응답 11건 중 7건이 불량 A/S 유형에서 발생함.</li>
+          <li>주요 저점 사유는 "접수 단계가 너무 많아서 복잡해요"로 확인되어, 담당자 상담 품질보다는 A/S 접수 단계의 복잡성 및 세션 중단 시 이어하기 어려운 구조가 CSAT 하락에 영향을 준 것으로 판단됨.</li>
+        </ul>
+      </div></div>
+      <div class="sum-item"><div class="sum-num">3</div><div class="sum-body">
+        <div class="sum-lead">CES 미달성 원인도 CSAT와 동일하게 불량 A/S 접수 플로우에 집중</div>
+        <ul>
+          <li>이번 주 CES는 3.55점으로 목표치 3.6점을 소폭 미달성함.</li>
+          <li>전체 응답의 약 80%를 차지하는 '불량 A/S 접수' 유형에서 점수 하락이 발생했으며, 8/11(화) 하루에 저점 응답이 집중되며 주간 평균을 낮춘 것으로 확인됨.</li>
+          <li>1점 응답 비중은 13.6% → 20.0%로 증가했고, 5점 응답 비중은 48.5% → 43.1%로 감소하여 최하점 응답 증가 패턴이 확인됨.</li>
+          <li>저점 사유는 접수 단계 복잡, 전화 상담 요청, 상담 중단 후 처음부터 재접수해야 하는 구조 등으로 확인되어, 8월 내 CES·CSAT 동시 개선 과제로 A/S 접수 플로우 간소화 및 ALF 톤앤매너·응대 구조 개선을 검토 예정.</li>
+        </ul>
+      </div></div>
+      <div class="sum-item"><div class="sum-num">4</div><div class="sum-body">
+        <div class="sum-lead">FRT는 전주 대비 크게 개선되며 전 브랜드 기준 목표 달성</div>
+        <ul>
+          <li>전 브랜드 평균 첫 응답 시간은 <b>2분 25초</b>로, 전주 9분 46초 대비 7분 21초 단축되며 목표치(10분 미만)를 달성함.</li>
+          <li>지난주 A그룹 담당 브랜드 일부에서 발생했던 FRT 지연 이슈에 대해, 상담 Open 알림 체계 및 운영 시작·점심 직후 우선 응대 담당자 지정 Action을 적용한 효과로 판단됨.</li>
+          <li>브랜드별로도 슬룸 2분 09초, 얼라인랩 3분 21초, 셀올로지 5분 14초 등 대부분 안정적으로 관리되고 있음.</li>
+        </ul>
+      </div></div>
+      <div class="sum-item"><div class="sum-num">5</div><div class="sum-body">
+        <div class="sum-lead">100%환불이벤트 페이지 디벨롭 완료로 Self-service 신뢰도 보완</div>
+        <ul>
+          <li>기존 100%환불이벤트 신청 페이지는 신청 완료 후 CX팀 후처리 시트에 신청 건이 누적되는 구조였으나, 고객에게 '정상 접수 완료' 안내가 별도로 발송되지 않아 재문의·중복 신청이 발생하고 있었음.</li>
+          <li>이에 신청 완료 시 고객에게 카카오톡 알림톡으로 '정상 신청 완료 안내'가 자동 발송되도록 로직 디벨롭을 완료하였으며, 8/18 기준 라이브 반영 완료함.</li>
+          <li>이를 통해 신청 완료 여부에 대한 고객 불안감을 낮추고, ALF 재문의 및 중복 신청 감소, 100%환불이벤트 접수 과정의 CES·CSAT 저하 방지 효과를 기대함.</li>
+        </ul>
+      </div></div>
+      <div class="sum-item"><div class="sum-num">6</div><div class="sum-body">
+        <div class="sum-lead">전 브랜드 CS 템플릿·알림톡 리뉴얼 및 GitHub 페이지 이관 완료</div>
+        <ul>
+          <li>2~3분기 R&amp;R 기준에 따라 전 브랜드 CS 템플릿 및 채널톡 상담 매크로 전반 리뉴얼을 완료함.</li>
+          <li>슬룸은 불량 교환 시 고객이 불량 제품 외 증정품 또는 보유 중인 다른 슬룸 제품까지 함께 발송하는 사례가 반복되어, 포장·발송 대상 기준을 명확히 보완함.</li>
+          <li>슬룸 외 브랜드도 최신 정책 및 실제 처리 기준에 맞춰 CS 템플릿을 업데이트하였으며, 사용하지 않는 알림톡 템플릿은 삭제하고 필요한 알림톡 문구는 최신 기준으로 정비함.</li>
+          <li>기존 구글 시트 기반 템플릿 관리 방식을 GitHub 페이지로 이관하고, 리뉴얼 문구 기준으로 채널톡 상담 매크로 재등록을 완료하여 전 브랜드 응대 표준화 및 운영 자산화를 진행함.</li>
+        </ul>
+      </div></div>
+      <div class="sum-item"><div class="sum-num">7</div><div class="sum-body">
+        <div class="sum-lead">슬룸 무응답 상담 종료 프로세스 변경으로 상담 맥락 기반 수동 처리 전환</div>
+        <ul>
+          <li>기존 슬룸 무응답 상담 종료 프로세스는 15분 1차 경고, 30분 2차 경고, 45분 최종 종료 후 워크플로우가 일괄 자동 종료되는 구조였음.</li>
+          <li>고객 답변 지연이 발생하는 경우가 잦고, 진행 중인 상담 상황과 관계없이 일괄 종료될 경우 재문의 및 고객 경험 저하 가능성이 있어 프로세스를 변경함.</li>
+          <li>변경 후에는 1시간 경과 시 담당 CX매니저에게 내부대화 1차 알림, 3시간 경과 시 최종 알림이 발송되며, 담당자가 상담 상황에 맞게 템플릿 발송 및 수동 종료 처리함.</li>
+          <li>이를 통해 불필요한 자동 종료를 줄이고, 상담 맥락에 따른 유연한 고객 응대가 가능할 것으로 기대함.</li>
+        </ul>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 02 OPERATION -->
+<div class="sec" id="s02">
+  <div class="sec-h"><div class="sec-no">02</div><div class="sec-t">CX팀 Weekly 운영 (Operation) 지표</div><div class="sec-note">Data 기준 · 08.08(토) ~ 08.14(금)</div></div>
+  <div class="tbl-wrap">
+    <table class="t">
+      <thead><tr><th>기준 브랜드</th><th>지표명</th><th>수치</th><th>전주 대비</th><th>목표치</th><th>상태</th><th style="min-width:220px">비고 · 코멘트</th></tr></thead>
+      <tbody>
+        <tr><td class="brand">전 브랜드</td><td class="l">전체 총 CS건수</td><td><b>1,252</b></td><td class="dn">▲ 86</td><td>-</td><td>-</td><td class="note">① I/B(유선+채팅+콜백) + ② OB(일반+리뷰) + ③ 메일·게시판 + ④ 슬룸 100%환불이벤트 신청 건 (※ ALF 단독 해결 건 미포함)</td></tr>
+        <tr><td class="brand">전 브랜드</td><td class="l">평균 CPD</td><td><b>33.2</b></td><td class="dn">▼ 1.9</td><td>-</td><td>-</td><td class="note">실제 담당자별 처리 현황과 별도로 1인 당 처리 건수</td></tr>
+        <tr><td class="brand">슬룸</td><td class="l">ALF 단독 해결 상담 수</td><td><b>912</b></td><td class="up">▲ 30</td><td>-</td><td>-</td><td class="note">AI(ALF) 단독 종결 상담</td></tr>
+        <tr><td class="brand">슬룸</td><td class="l">ALF 해결률</td><td><b>92.20%</b></td><td class="dn">▼ 1.4%</td><td>90% 이상</td><td><span class="badge b-ok">달성</span></td><td class="note">-</td></tr>
+        <tr><td class="brand">슬룸</td><td class="l">ALF 처리 비율 (전체 상담 대비)</td><td><b>75.37%</b></td><td class="dn">▼ 2.47%</td><td>71% 이상</td><td><span class="badge b-ok">달성</span></td><td class="note">-</td></tr>
+        <tr><td class="brand">슬룸</td><td class="l">CES (고객 노력 점수)</td><td><b>3.55점</b></td><td class="dn">▼ 0.23점</td><td>3.6점</td><td><span class="badge b-no">미달성</span></td><td class="note">불량 A/S 접수 경험 영향 — 개선 과제</td></tr>
+        <tr><td class="brand">전 브랜드</td><td class="l">CSAT (상담 만족도)</td><td><b>4.28점</b></td><td class="dn">▼ 0.28점</td><td>4.0점 이상</td><td><span class="badge b-ok">달성</span></td><td class="note">채널톡 CSAT 응답 데이터 기준</td></tr>
+        <tr><td class="brand">전 브랜드</td><td class="l">평균 첫 응답 시간 (FRT)</td><td><b>2분 25초</b></td><td class="up">▼ 7분 21초</td><td>10분 미만</td><td><span class="badge b-ok">달성</span></td><td class="note">전주 대비 대폭 개선</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 02-1 상세 운영 지표 -->
+  <div class="tbl-cap"><span class="ic">📊</span> 02-1. 슬룸 콜백 유형별 요청 현황 (Daily)</div>
+  <div class="tbl-wrap">
+    <table class="t">
+      <thead><tr><th>콜백티켓 유형</th><th>8/10 월</th><th>8/11 화</th><th>8/12 수</th><th>8/13 목</th><th>8/14 금</th></tr></thead>
+      <tbody>
+        <tr><td class="l">전화구매</td><td>5</td><td>3</td><td>0</td><td>0</td><td>2</td></tr>
+        <tr><td class="l">주문취소</td><td>0</td><td>0</td><td>1</td><td>2</td><td>1</td></tr>
+        <tr><td class="l">반품·교환 철회 요청</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td class="l">교환제품_배송일정</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td class="l">반품 환불 일정</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td class="l">오배송·미배송 (배송오류)</td><td>2</td><td>1</td><td>3</td><td>0</td><td>0</td></tr>
+        <tr><td class="l">재회수 요청</td><td>1</td><td>1</td><td>0</td><td>3</td><td>1</td></tr>
+        <tr><td class="l">취소 후 배송·회수 요청</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr style="font-weight:700;background:#f4f8ff"><td class="l">총 합</td><td>8</td><td>6</td><td>4</td><td>5</td><td>4</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tbl-cap"><span class="ic">📊</span> 전 브랜드 평균 첫 응답 시간 (FRT) <span style="font-weight:500;color:var(--muted);font-size:11px">(First Response Time)</span></div>
+  <div class="tbl-wrap">
+    <table class="t">
+      <thead><tr><th>브랜드</th><th>8/10 월</th><th>8/11 화</th><th>8/12 수</th><th>8/13 목</th><th>8/14 금</th><th>평균 FRT</th></tr></thead>
+      <tbody>
+        <tr><td class="brand">슬룸</td><td>0:02:25</td><td>0:02:37</td><td>0:01:39</td><td>0:02:26</td><td>0:01:40</td><td><b>0:02:09</b></td></tr>
+        <tr><td class="brand">빌바</td><td>0:00:10</td><td>-</td><td>0:00:23</td><td>-</td><td>0:00:13</td><td><b>0:00:15</b></td></tr>
+        <tr><td class="brand">얼라인랩</td><td>0:04:53</td><td>0:02:34</td><td>0:03:14</td><td>0:02:55</td><td>0:03:10</td><td><b>0:03:21</b></td></tr>
+        <tr><td class="brand">심플리케어</td><td>-</td><td>-</td><td>0:00:13</td><td>-</td><td>-</td><td><b>0:00:13</b></td></tr>
+        <tr><td class="brand">셀올로지</td><td>0:00:34</td><td>-</td><td>0:08:57</td><td>0:06:12</td><td>-</td><td><b>0:05:14</b></td></tr>
+        <tr><td class="brand">코코다움</td><td>0:00:12</td><td>-</td><td>-</td><td>-</td><td>0:01:23</td><td><b>0:00:48</b></td></tr>
+        <tr><td class="brand">12 o'clock</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><b>-</b></td></tr>
+        <tr><td class="brand">닥터맨즈</td><td>0:01:24</td><td>0:01:47</td><td>-</td><td>-</td><td>-</td><td><b>0:01:36</b></td></tr>
+        <tr><td class="brand">닥터아망</td><td>-</td><td>0:01:47</td><td>-</td><td>-</td><td>-</td><td><b>0:01:47</b></td></tr>
+        <tr><td class="brand">와이브닝</td><td>-</td><td>0:01:51</td><td>-</td><td>-</td><td>-</td><td><b>0:01:51</b></td></tr>
+        <tr><td class="brand">마넬</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><b>-</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tbl-cap"><span class="ic">📊</span> 상위 브랜드별 상담 태그 TOP5 (I/B)</div>
+  <div class="tbl-wrap">
+    <table class="t">
+      <thead><tr><th>브랜드</th><th>상담태그</th><th>총 건수</th><th>전체 I/B 중 비율</th></tr></thead>
+      <tbody>
+        <tr><td class="brand" rowspan="5">슬룸</td><td class="l">불량 / 불량확정</td><td>107</td><td>39.90%</td></tr>
+        <tr><td class="l">불량 / 불량문의</td><td>62</td><td>23.10%</td></tr>
+        <tr><td class="l">유상AS / 유상AS신청</td><td>23</td><td>8.60%</td></tr>
+        <tr><td class="l">반품 / 반품신청</td><td>16</td><td>6.00%</td></tr>
+        <tr><td class="l">기타 / 중복문의</td><td>14</td><td>5.20%</td></tr>
+        <tr><td class="brand" rowspan="5">얼라인랩</td><td class="l">불량 / 불량문의</td><td>21</td><td>39.60%</td></tr>
+        <tr><td class="l">불량 / 불량확정</td><td>20</td><td>37.70%</td></tr>
+        <tr><td class="l">유상AS / 유상AS문의</td><td>4</td><td>7.50%</td></tr>
+        <tr><td class="l">반품 / 회수재신청</td><td>1</td><td>1.85%</td></tr>
+        <tr><td class="l">기타 / 중복문의</td><td>1</td><td>1.85%</td></tr>
+        <tr><td class="brand" rowspan="5">셀올로지</td><td class="l">반품 / 반품신청</td><td>2</td><td>20.00%</td></tr>
+        <tr><td class="l">유상AS / 유상AS문의</td><td>2</td><td>20.00%</td></tr>
+        <tr><td class="l">100%환불이벤트 / 문의(화장품)</td><td>1</td><td>10.00%</td></tr>
+        <tr><td class="l">주문 / 취소후배송</td><td>1</td><td>10.00%</td></tr>
+        <tr><td class="l">주문 / 주문내역확인</td><td>1</td><td>10.00%</td></tr>
+        <tr><td class="brand" rowspan="3">빌바</td><td class="l">무통장입금 / 입금확인요청</td><td>1</td><td>33.30%</td></tr>
+        <tr><td class="l">결제취소 / 계좌환불</td><td>1</td><td>33.30%</td></tr>
+        <tr><td class="l">반품 / 반품현황확인</td><td>1</td><td>33.30%</td></tr>
+        <tr><td class="brand" rowspan="3">코코다움</td><td class="l">배송 / 배송일정</td><td>1</td><td>33.30%</td></tr>
+        <tr><td class="l">무통장입금 / 입금확인요청</td><td>1</td><td>33.30%</td></tr>
+        <tr><td class="l">제품 / 급여방법</td><td>1</td><td>33.30%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tbl-cap"><span class="ic">📊</span> 8월 2wk 담당자별 실적 현황 <span style="font-weight:500;color:var(--muted);font-size:11px">(게시판은 개별 집계 불가)</span></div>
+  <div class="tbl-wrap">
+    <table class="t">
+      <thead><tr><th>담당자</th><th>근속</th><th style="min-width:200px">담당 브랜드</th><th>평균 CPD</th><th>평균 CPH</th><th>타업무 시간</th><th style="min-width:240px">타업무 상세</th></tr></thead>
+      <tbody>
+        <tr><td class="brand">조건</td><td>14M</td><td class="note">슬룸, 얼라인랩, 셀올로지, 닥터아망, 와이브닝, 닥터맨즈</td><td>20.3</td><td>4.4</td><td>3h 30m</td><td class="note">8/10 1h 1on1 / 8/12 30m 빌바 AS배너 기획안 / 8/14 2h OKR 달성 방안 아이데이션</td></tr>
+        <tr><td class="brand">전승리</td><td>12M</td><td class="note">슬룸, 얼라인랩, 셀올로지, 닥터아망, 와이브닝, 닥터맨즈</td><td>19.8</td><td>4.2</td><td>3h</td><td class="note">8/11 1h / 8/14 2h OKR 달성 방안 아이데이션</td></tr>
+        <tr><td class="brand">박가영</td><td>11M</td><td class="note">슬룸, 심플리케어, 빌바, 코코다움, 12 o'clock, 마넬</td><td>20.2</td><td>4.2</td><td>3h 30m</td><td class="note">8/10 1h30m 1on1 / 8/14 2h OKR 달성 방안 아이데이션</td></tr>
+        <tr><td class="brand">허윤선</td><td>5M</td><td class="note">슬룸, 심플리케어, 빌바, 코코다움, 12 o'clock, 마넬</td><td>14.5</td><td>2.9</td><td>2h</td><td class="note">8/14 2h OKR 달성 방안 아이데이션</td></tr>
+        <tr><td class="brand">박혜정</td><td>3M</td><td class="note">슬룸, 심플리케어, 빌바, 코코다움, 12 o'clock, 마넬</td><td>11.6</td><td>4.0</td><td>13h</td><td class="note">8/11 3h CS템플릿 개편 / 8/12 3h CS템플릿 개편 / 8/13 5h CS템플릿 개편 / 8/14 2h OKR 달성 방안 아이데이션</td></tr>
+        <tr><td class="brand">김예린 (PT)</td><td>5M</td><td class="note">슬룸</td><td>14.3</td><td>4.8</td><td>-</td><td class="note">-</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 지표 코멘트 -->
+  <div class="card" style="margin-top:22px">
+    <div class="pill-h"><span class="dot"></span>📍 지표 Comment</div>
+    <div class="cmt">
+      <h4>[1] KPI 지표 상세 코멘트</h4>
+      <h5>① CSAT (상담 고객 만족도 점수 · Customer Satisfaction Score)</h5>
+      <ul>
+        <li>이번 주 CSAT는 <b>4.28점</b>으로, 전주 4.56점 대비 0.28점 하락하였으나 목표치(4.0점 이상)는 달성.</li>
+        <li>다만 얼라인랩 5점 응답 3건이 전체 평균을 일부 견인한 것으로 보이며, 주요 볼륨을 차지하는 슬룸 기준으로는 8월 2주차(8/8~8/14) CSAT 3.89점(65건)으로 전주 4.17점 대비 하락 확인.</li>
+        <li>슬룸 CSAT 하락은 담당자 상담 품질보다는 불량 A/S 접수 프로세스에서 발생한 고객 노력 증가 영향이 큰 것으로 판단됨.</li>
+        <li>특히 1점 응답 비중이 3.0% → 10.8%로 3배 이상 증가하였고, 저점(1~2점) 응답 11건 중 7건이 불량 A/S 유형에서 발생함.</li>
+        <li>저점 사유는 주로 "접수 단계가 너무 많아서 복잡해요"로 확인되며, 이는 CES 저점 사유와도 동일하게 나타남.</li>
+      </ul>
+      <p class="arrow">→ CSAT와 CES 모두 불량 A/S 접수 단계의 복잡성, 세션 중단 시 이어하기 어려운 구조가 동일 티켓 내에서 동시에 지표를 낮춘 것으로 확인됨.</p>
+      <p class="arrow">→ 따라서 CSAT 개선을 위해서는 상담 품질 피드백보다 A/S 접수 단계 간소화, 무응답 종료 이후 재접수 부담 완화가 우선 과제로 판단됨.</p>
+
+      <h5>② CES (고객 노력 점수)</h5>
+      <ul>
+        <li>이번 주 CES 하락은 전체 응답의 약 80%를 차지하는 '불량 A/S 접수' 유형의 점수 하락과 8/11(화) 하루에 저점(1점) 응답이 집중된 영향으로 확인됨.</li>
+        <li>점수 분포상 1점 응답 비중은 13.6% → 20.0%로 증가했고, 5점 응답 비중은 48.5% → 43.1%로 감소함.</li>
+        <li>중간 점수대가 늘어난 것이 아니라 최하점 응답이 증가한 패턴으로, 특정 접수 경험에서 고객 불편이 강하게 발생한 것으로 판단됨.</li>
+        <li>저점(1~2점) 응답 17건 중 다수가 "접수 단계가 너무 많아서 복잡해요"를 사유로 선택함.</li>
+        <li>서술형 코멘트에서도 "근무시간인데 답없다고 상담이 종료됨", "중간에 이탈하면 처음부터 재접수해야 함" 등 유사한 불편이 반복 확인됨.</li>
+      </ul>
+      <p class="subttl">[주요 원인]</p>
+      <ul>
+        <li><b>1. 접수 단계 자체의 복잡성</b> — 증상 선택·사진 제출 등 단계가 많아 고객이 A/S 접수를 번거롭게 인지.</li>
+        <li><b>2. 세션 중단 후 이어하기 어려운 구조</b> — 장시간 무응답 후 상담 종료 시 기존 접수 흐름을 이어가기 어렵고 처음부터 재진행해야 하는 구조적 문제 확인. "접수하다가 전화통화하고 오면 다시 시작해야 한다" 등 의견 확인, 8/11·8/13 저점 케이스 모두 해당 이슈와 연결됨.</li>
+      </ul>
+      <p class="arrow">→ CES 개선을 위해서는 A/S 접수 플로우 간소화, 무응답 종료 기준 보완, 상담 중단 후 재진입·이어하기 구조 개선이 필요하며, 해당 이슈는 CSAT 저점 사유와도 동일하게 연결됨.</p>
+
+      <h4>[2] 담당자별 실적 상세 코멘트</h4>
+      <p class="subttl">① 박가영</p>
+      <ul>
+        <li>총 처리 건수 101건, 평균 CPD 20.2건으로 팀 내 1위 기록.</li>
+        <li>슬룸 포함 담당 브랜드의 전화 상담 수신량이 증가하며 전체 처리 건수 상승에 영향, 상담 처리량 기준 핵심 운영 인력으로 안정적 기여 중.</li>
+      </ul>
+      <p class="subttl">② 조건</p>
+      <ul>
+        <li>CPH 4.4건으로 시간당 처리 효율 최상위권 기록.</li>
+        <li>담당 브랜드 내 상담 인입을 안정적으로 처리하고 있으며, 처리 효율 측면에서 우수한 흐름 유지 중.</li>
+      </ul>
+      <p class="subttl">③ 허윤선</p>
+      <ul>
+        <li>CPH 2.9건으로 팀 내 최저 수준이나 타업무 시간은 2h로 크지 않음.</li>
+        <li>실인입·상담량이 많았던 8/10(월) 연차 영향으로 처리량이 낮게 집계된 것으로 보이며, 개인 효율 저하라기보다 고인입 요일 부재에 따른 자연스러운 편차 가능성이 높아 차주 지표와 함께 추가 확인 예정.</li>
+      </ul>
+      <p class="subttl">④ 김예린 (PT)</p>
+      <ul>
+        <li>오전 3h 근무 기준 CPH 4.8건으로 팀 내 최고 효율 기록, 파트타이머 운영 목적에 맞게 오전 시간대 상담 처리 효율이 매우 양호.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 03 Issues -->
+<div class="sec" id="s03">
+  <div class="sec-h"><div class="sec-no">03</div><div class="sec-t">Issues · Escalation</div></div>
+  <div class="empty"><span class="ico">✅</span>이번 주 별도 에스컬레이션 이슈 없음</div>
+</div>
+
+<!-- 04 VOC -->
+<div class="sec" id="s04">
+  <div class="sec-h"><div class="sec-no">04</div><div class="sec-t">주요 VOC · 고객 인사이트</div></div>
+  <div class="empty"><span class="ico">💬</span>이번 주 별도 등록된 주요 VOC 없음 <span style="display:block;font-size:11px;margin-top:6px">(상세 VOC·품질 이슈는 QC·교환반품 월간 리포트에서 관리)</span></div>
+</div>
+
+<!-- 05 Done + Next Week -->
+<div class="sec" id="s05">
+  <div class="sec-h blue"><div class="sec-no">05</div><div class="sec-t">이번 주 완료 사항 (Done) · Next Week Action Items</div></div>
+
+  <div class="pill-h" style="margin-bottom:12px">✅ Done (이번 주 Action Items)</div>
+
+  <div class="done-item">
+    <div class="done-top"><div class="done-idx">1</div><div class="done-ttl">[슬룸] 100%환불이벤트 페이지 디벨롭</div><div class="done-meta"><span>👤 조건, 전승리</span><span>📅 08/20</span></div><span class="st st-done">🔵 완료</span></div>
+    <div class="done-body">
+      <div class="blk-t">[진행 배경]</div>
+      <ul>
+        <li>기존 100%환불이벤트 신청 페이지는 고객이 신청 완료 후 CX팀 후처리 시트에 신청 건이 누적되는 구조였으나, 실제 담당자가 처리하기 전까지 고객에게 '정상 접수 완료' 안내가 별도로 발송되지 않는 상태였음.</li>
+        <li>고객 입장에서 신청 완료 여부를 즉시 확인하기 어려워 "정상적으로 신청된 것이 맞는지"에 대한 불안감이 발생, 해당 불안감은 ALF 재문의 또는 중복 신청으로 이어짐 → 결과적으로 IPV 증가 및 잠재적 CSAT·CES 하락 요인으로 작용.</li>
+      </ul>
+      <div class="blk-t">[적용 내용]</div>
+      <ul>
+        <li>100%환불이벤트 신청 완료 시 고객에게 카카오톡 알림톡으로 '정상 신청 완료 안내'가 자동 발송되도록 로직 디벨롭 완료.</li>
+        <li>고객이 신청 직후 접수 완료 여부를 즉시 확인할 수 있도록 개선, 8/18 기준 라이브 반영 완료.</li>
+      </ul>
+      <div class="blk-t">[기대 효과]</div>
+      <ul>
+        <li>신청 완료 여부에 대한 고객 불안감 감소.</li>
+        <li>정상 접수 확인 목적의 ALF 재문의 및 중복 신청 감소 기대.</li>
+        <li>100%환불이벤트 접수 과정에서의 고객 노력도(CES) 개선 및 상담 만족도 저하 방지, Self-service 기반 신청 프로세스 신뢰도 향상.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="done-item">
+    <div class="done-top"><div class="done-idx">2</div><div class="done-ttl">[전 브랜드] CS 템플릿·알림톡 리뉴얼 및 페이지 이동</div><div class="done-meta"><span>👤 박근영, 박혜정</span><span>📅 08/18</span></div><span class="st st-done">🔵 완료</span></div>
+    <div class="done-body">
+      <div class="blk-t">[진행 배경]</div>
+      <ul>
+        <li>2~3분기 R&amp;R 기준에 따라 전 브랜드 CS 템플릿 및 채널톡 상담 매크로 정비를 진행. 기존 템플릿은 브랜드별 업데이트 수준이 상이했으며, 특히 슬룸 외 브랜드는 최신 정책·처리 기준이 충분히 반영되지 않아 전반적 정비 필요.</li>
+        <li>슬룸의 경우에도 불량 교환 안내 시 고객이 불량 제품만 발송해야 하나 증정품 또는 본인 보유 다른 슬룸 제품까지 함께 발송하는 사례가 반복되어 불필요한 재상담·후처리 공수 발생.</li>
+      </ul>
+      <div class="blk-t">[진행 내용]</div>
+      <ul>
+        <li>전 브랜드 CS 템플릿 및 채널톡 상담 매크로 문구 전반 리뉴얼 진행.</li>
+        <li>슬룸 불량 교환 안내 템플릿 내 포장·발송 대상 기준을 명확히 보완하여 고객 오발송 및 재상담 발생 가능성 완화.</li>
+        <li>슬룸 외 브랜드도 최신 정책·실제 운영 기준에 맞춰 CS 템플릿 전반 업데이트, 미사용 알림톡 템플릿은 삭제하고 필요한 알림톡 문구는 최신 기준으로 정비.</li>
+        <li>기존 구글 시트 기반 CS 템플릿 페이지를 GitHub 페이지로 이관하여 접근성·관리 효율 개선, 리뉴얼 문구 기준으로 채널톡 상담 매크로 재등록 완료.</li>
+      </ul>
+      <div class="blk-t">[기대 효과]</div>
+      <ul>
+        <li>모든 CX매니저가 동일 기준·문구로 응대할 수 있어 상담 품질 편차 감소 및 고객 만족도 개선 기대.</li>
+        <li>불량 교환·반품 등 반복 문의 유형에서 고객 오인지 및 불필요한 재상담 감소 기대.</li>
+        <li>개인별 노하우에 의존하던 응대 방식을 표준화하여 향후 신규 입사자 온보딩 및 전 브랜드 운영에 지속 활용 가능한 CS 운영 자산으로 관리 가능.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="done-item">
+    <div class="done-top"><div class="done-idx">3</div><div class="done-ttl">[슬룸] 무응답 상담 종료 프로세스 변경</div><div class="done-meta"><span>👤 김현지</span><span>📅 08/18</span></div><span class="st st-done">🔵 완료</span></div>
+    <div class="done-body">
+      <div class="blk-t">[진행 배경]</div>
+      <ul>
+        <li>기존 슬룸 무응답 상담 종료 프로세스는 15분 1차 경고, 30분 2차 경고, 45분 최종 종료 후 워크플로우가 일괄 자동 종료되는 구조였음.</li>
+        <li>고객 답변 지연이 잦고, 진행 중인 상담 상황과 관계없이 일괄 종료될 경우 고객 경험 저하 및 재문의 발생 가능성 → 응답 대기 시간을 확대하고 담당 CX매니저가 직접 판단·처리하도록 프로세스 변경.</li>
+      </ul>
+      <div class="blk-t">[변경 내용]</div>
+      <ul>
+        <li>기존: 15분 1차 경고 / 30분 2차 경고 / 45분 최종 종료 + 워크플로우 일괄 자동 종료.</li>
+        <li>변경: 1시간 경과 시 담당 CX매니저에게 내부대화 1차 알림 / 3시간 경과 시 최종 알림. 일괄 자동 종료 없이 담당자가 알림 확인 후 상담 상황에 맞게 템플릿 발송 및 수동 종료.</li>
+      </ul>
+      <div class="blk-t">[운영 기준]</div>
+      <ul>
+        <li>정상 종료되었으나 고객 응답만 없는 경우(1시간): 정상 상담 종료 인사 안내 발송 후 수동 종료.</li>
+        <li>고객 답변을 계속 기다리는 경우(1시간): 상담 리마인드 멘트 발송 후 대기 — 담당자가 상담 고객용 링크를 직접 삽입하여 고객이 기존 상담으로 재진입하도록 안내.</li>
+        <li>고객 답변을 계속 기다리는 경우(3시간): 최종 상담 종료 안내, 단 상담 유형에 맞는 재문의 경로 안내 후 수동 종료.</li>
+      </ul>
+      <div class="blk-t">[기대 효과]</div>
+      <ul>
+        <li>고객 응답 대기 시간 확대로 불필요한 상담 종료 및 재문의 발생 가능성 감소.</li>
+        <li>상담 맥락에 따라 담당자가 직접 판단하도록 변경하여 고객 경험 저하 방지, 일괄 자동 종료보다 유연한 상담 운영 가능.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pill-h" style="margin:22px 0 12px">📅 Next Week (다음 주 주요 업무 Plan · Action Items)</div>
+  <div class="empty"><span class="ico">🗓️</span>다음 주 Action Items 작성 예정</div>
+</div>
+
+<!-- 06 Agenda -->
+<div class="sec" id="s06">
+  <div class="sec-h pur"><div class="sec-no">06</div><div class="sec-t">이번 주 아젠다 · 팀 운영 현황 보고</div></div>
+  <div class="empty"><span class="ico">✍️</span>작성 중 — 확정 후 업데이트 예정</div>
 </div>
 `;
 
