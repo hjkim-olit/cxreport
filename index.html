@@ -469,6 +469,7 @@ table.t td.tgt{font-weight:700;color:var(--navy)}
 const REPORTS = {
   '2026-08': [
     { id:'2026-08-w3', week:'W3', title:'8월 3주차 주간보고', date:'2026-08-19', period:'08.08(토) ~ 08.14(금)' },
+    { id:'2026-08-hk-handover', week:'계획서', title:'CX팀_셀올로지_홍콩CS_이관계획서', date:'2026-08-18', period:'' },
     { id:'2026-08-w2', week:'W2', title:'8월 2주차 주간보고', date:'2026-08-12', period:'08.01(토) ~ 08.07(금)' },
     { id:'2026-08-w1', week:'W1', title:'8월 1주차 주간보고', date:'2026-08-05', period:'07.25(토) ~ 07.31(금)' }
   ],
@@ -1678,6 +1679,17 @@ REPORT_HTML['2026-08-w3'] = `
 </div>
 `;
 
+/* ---- 셀올로지 홍콩 CS 이관계획서 (원본 문서 iframe 임베드) ---- */
+REPORT_HTML['2026-08-hk-handover'] = `
+<iframe class="doc-frame" src="reports/2026-08-sellology-hk-handover.html"
+        title="셀올로지 홍콩 CS 이관계획서" scrolling="no"
+        onload="sizeDocFrame(this)"
+        style="width:100%;border:0;display:block;min-height:80vh;border-radius:12px;overflow:hidden"></iframe>
+`;
+function sizeDocFrame(f){
+  try{ f.style.height = (f.contentWindow.document.documentElement.scrollHeight + 24) + 'px'; }catch(e){}
+}
+
 /* ============ 뷰 로직 ============ */
 const panels = {
   weekly: document.getElementById('panel-weekly'),
@@ -1706,7 +1718,7 @@ function renderMonth(m){
     <div class="rcard" onclick="openReport('${r.id}')">
       <span class="rcard-wk">${r.week}</span>
       <div class="rcard-ttl">${r.title}</div>
-      <div class="rcard-meta">📅 보고일 ${r.date}<br>📊 Data 기준 ${r.period}</div>
+      <div class="rcard-meta">📅 보고일 ${r.date}${r.period ? '<br>📊 Data 기준 '+r.period : ''}</div>
       <span class="rcard-arrow">→</span>
     </div>`).join('');
 }
