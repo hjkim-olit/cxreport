@@ -173,6 +173,18 @@ table.t tr.ka td.ka-lbl{text-align:left;color:#8091ae;font-weight:600;white-spac
 .done-body a{color:var(--acc);font-weight:600;text-decoration:none;word-break:break-all}
 .done-body a:hover{text-decoration:underline}
 
+/* seatmap */
+.seatmap{border:1px solid var(--brd);border-radius:var(--r);padding:14px;background:#f7f9fc;margin:8px 0 6px}
+.seatmap-dir{text-align:center;font-weight:700;font-size:12px;color:#4a5a78;background:#e6ebf3;border-radius:6px;padding:7px;margin-bottom:14px}
+.seatmap-cols{display:flex;gap:60px;justify-content:center;flex-wrap:wrap}
+.seatmap-col{display:flex;flex-direction:column;gap:0;min-width:190px}
+.seat{border:1px solid #c3ccdb;background:#fff;padding:16px 12px;text-align:center;font-weight:700;font-size:13px;color:#2b3a57;border-bottom:none}
+.seatmap-col .seat:last-child{border-bottom:1px solid #c3ccdb}
+.seat-chg{color:#2f5bff;font-weight:700;margin-left:2px}
+.seat-new{color:#2f5bff;font-weight:700;margin-left:2px}
+.seat-keep{color:#7a8aa5;font-weight:600;margin-left:2px}
+.seat-empty{color:#9aa6ba}
+
 /* agenda */
 .agenda-row{display:flex;align-items:center;gap:12px;background:var(--surf);border:1px solid var(--brd);border-radius:var(--r);padding:14px 18px;box-shadow:var(--sh);margin-bottom:10px}
 .agenda-idx{width:22px;height:22px;border-radius:6px;background:var(--pur);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -477,6 +489,7 @@ const REPORTS = {
     { id:'2026-08-w1', week:'W1', title:'8월 1주차 주간보고', date:'2026-08-05', period:'07.25(토) ~ 07.31(금)' }
   ],
   '2026-09': [
+    { id:'2026-09-w3', week:'W3', title:'9월 3주차 주간보고', date:'2026-09-22', period:'09.12(토) ~ 09.18(금)' },
     { id:'2026-09-w2', week:'W2', title:'9월 2주차 주간보고', date:'2026-09-16', period:'09.05(토) ~ 09.11(금)' },
     { id:'2026-09-w1', week:'W1', title:'9월 1주차 주간보고', date:'2026-09-09', period:'08.29(토) ~ 09.04(금)' }
   ],
@@ -1274,6 +1287,394 @@ REPORT_HTML['2026-09-w2'] = `
 <div class="sec" id="s06">
   <div class="sec-h pur"><div class="sec-no">06</div><div class="sec-t">이번 주 아젠다 · 팀 운영 현황 보고</div></div>
   <div class="empty"><span class="ico">🗂️</span>별도로 보고 사항 없음</div>
+</div>
+`;
+REPORT_HTML['2026-09-w3'] = `
+<div class="rep-head">
+  <div class="kicker">CX팀 Weekly Report</div>
+  <h1>2026년 9월 W3</h1>
+  <div class="period">Data 기준 · 09.12(토) — 09.18(금)</div>
+  <div class="chips">
+    <span class="rhchip">Summary</span>
+    <span class="rhchip">Operation</span>
+    <span class="rhchip">Issues</span>
+    <span class="rhchip">Escalation</span>
+    <span class="rhchip">VOC</span>
+    <span class="rhchip">Action Items</span>
+    <span class="rhchip">Agenda</span>
+  </div>
+</div>
+
+<!-- 01 EXECUTIVE SUMMARY -->
+<div class="sec" id="s01">
+  <div class="sec-h teal"><div class="sec-no">01</div><div class="sec-t">EXECUTIVE SUMMARY</div></div>
+  <div class="card">
+    <div class="pill-h"><span class="dot"></span>📌 이번 주 핵심 요약</div>
+    <div class="sum-list">
+      <div class="sum-item"><div class="sum-num">1</div><div class="sum-body">
+        <div class="sum-lead">홍콩 CS 대량 인입으로 전체 처리량이 전주 대비 급증했으나, 주요 운영 KPI는 안정적으로 목표 달성</div>
+        <ul>
+          <li>이번 주 전체 CS는 <b>2,958건</b>으로 전주 대비 1,382건(+87.7%) 증가했으며, 평균 CPD도 <b>135.3건</b>으로 전주 대비 74.9건 상승함.</li>
+          <li>슬룸 ALF 단독 해결 상담 수는 <b>1,305건</b>으로 전주 대비 148건 증가했으며, ALF 해결률 92.0%, ALF 처리 비율 77.49%로 모두 목표치를 달성함.</li>
+          <li>전 브랜드 평균 FRT는 <b>3분 18초</b>로 전주 대비 24초 증가했으나 목표치(10분 이내)를 안정적으로 유지함.</li>
+          <li>홍콩 배송 지연 관련 대량 문의와 국내 CS를 동시에 대응한 상황에서도 핵심 운영 지표는 전반적으로 안정적으로 유지된 것으로 판단됨.</li>
+        </ul>
+      </div></div>
+      <div class="sum-item"><div class="sum-num">2</div><div class="sum-body">
+        <div class="sum-lead">CSAT 4.12점·CES 3.96점으로 동반 상승, 고객 경험 지표 모두 목표 달성</div>
+        <ul>
+          <li>전 브랜드 CSAT는 <b>4.12점</b>으로 전주 대비 0.19점 상승하며 목표치(4.0점 이상)를 달성함.</li>
+          <li>전체 응답의 93%를 차지하는 슬룸 CSAT도 전주 3.86점 → 금주 <b>4.10점</b>으로 회복하며 목표 구간에 재진입함.</li>
+          <li>CES는 전주 3.67점 → 금주 <b>3.96점</b>으로 0.29점 상승하여 목표치(3.6점 이상)를 달성함.</li>
+          <li>9월 3주차 기준 슬룸 CSAT·CES가 동시에 상승하여, 상담 만족도와 접수 편의성 모두 개선 흐름이 확인됨.</li>
+        </ul>
+      </div></div>
+      <div class="sum-item"><div class="sum-num">3</div><div class="sum-body">
+        <div class="sum-lead">불량 A/S 접수 간소화 효과가 지표상 가시화, 무응답 상담은 추가 모니터링 필요</div>
+        <ul>
+          <li>9/3 적용한 불량 A/S 접수 간소화 이후 불량 유형 CES는 3.74 → 3.82 → <b>4.08점</b>으로 3주 연속 상승함.</li>
+          <li>슬룸 전체 CES 역시 3.67 → 3.67 → <b>3.96점</b>으로 개선되어, 접수 단계 축소가 고객 노력도 개선에 일부 긍정적인 영향을 준 것으로 판단됨.</li>
+          <li>다만 불량 A/S 저점 응답 11건은 여전히 잔존하고 있어 추가 저점 사유 분석 및 개선 필요.</li>
+          <li>무응답 상담 종료 관련 불만은 개선 직후 감소했으나 최근 2주 재증가하여, 종료 프로세스 자체보다 상담 중 대기시간 및 리드타임까지 포함한 추가 관리가 필요함.</li>
+        </ul>
+      </div></div>
+      <div class="sum-item"><div class="sum-num">4</div><div class="sum-body">
+        <div class="sum-lead">셀올로지 홍콩 배송 지연 이슈는 주 후반 안정화, 재발 방지를 위한 사전 공유 체계 정비 필요</div>
+        <ul>
+          <li>9월 3주차 홍콩 CS는 총 <b>1,040건</b>이며, 이 중 배송 관련 문의가 841건(80.9%)을 차지함.</li>
+          <li>전체 CS는 430 → 232 → 166 → 123 → 89건으로 감소하여 9/14 대비 9/18 약 79% 감소, 주 후반 안정화 흐름이 확인됨.</li>
+          <li>다만 사전예약 물량 미공유, 주문일 기준 순차 출고 미이행, 안내된 출고 일정과 실제 일정 불일치가 복합적으로 발생한 Orange 등급 이슈로 관리 중.</li>
+          <li>향후 사전예약·대량 주문·배송 지연 발생 시 SCM·물류사 ↔ 글로벌팀 ↔ CX팀 간 예상 물량, 출고 일정 및 변경 사항을 사전에 공유하는 대응 체계 명확화가 필요함.</li>
+          <li>셀올로지(HK) 채널톡 도입을 위한 견적 산정도 병행 중.</li>
+        </ul>
+      </div></div>
+      <div class="sum-item"><div class="sum-num">5</div><div class="sum-body">
+        <div class="sum-lead">10/26 이후 CX팀 운영 안정화를 위한 CX매니저 신규 TO 1명 채용 의사결정 필요</div>
+        <ul>
+          <li>10/26부로 CX팀 팀장 공석이 발생할 예정이며, 이후 박근영 파트장이 팀 운영을 이어서 담당하는 방향으로 논의 중.</li>
+          <li>박근영님이 팀장 역할을 수행할 경우 기존 실무 인력 1명이 관리 역할로 이동하여 CX매니저 실무 공석이 추가 발생함.</li>
+          <li>현재 국내 전 브랜드 CS와 셀올로지 홍콩 CS까지 운영 범위가 확대된 상황으로, 별도 충원 없이 현 인력만으로 운영할 경우 상담 처리 및 개선 과제 수행 여력 저하 가능성이 있음.</li>
+          <li>이에 CX매니저(팀원) 1명 신규 TO를 요청하며, 10/26 이후 채용을 시작하기보다 연휴 이후 즉시 채용을 진행하여 10월 말 합류를 목표로 선제적으로 인력을 확보하는 방향 검토 요청.</li>
+        </ul>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 02 OPERATION -->
+<div class="sec" id="s02">
+  <div class="sec-h"><div class="sec-no">02</div><div class="sec-t">CX팀 Weekly 운영 (Operation) 지표</div><div class="sec-note">Data 기준 · 09.12(토) ~ 09.18(금)</div></div>
+  <div class="tbl-wrap">
+    <table class="t">
+      <thead><tr><th>기준 브랜드</th><th>지표명</th><th>수치</th><th>전주 대비</th><th>목표치</th><th>상태</th><th style="min-width:220px">비고 · 코멘트</th></tr></thead>
+      <tbody>
+        <tr><td class="brand">전 브랜드</td><td class="l">전체 총 CS건수</td><td><b>2,958</b></td><td class="up">▲ 1382</td><td>-</td><td>-</td><td class="note">① I/B(유선 I/B+채팅 I/B+콜백) + ② OB(일반OB+리뷰OB) + ③ 메일·게시판 + ④ 슬룸 100%환불이벤트 신청 건 (※ ALF 단독 해결 건 미포함)</td></tr>
+        <tr><td class="brand">전 브랜드</td><td class="l">평균 CPD</td><td><b>135.3</b></td><td class="up">▲ 74.9</td><td>-</td><td>-</td><td class="note">실제 담당자별 처리 현황과 별도로 1인 당 처리 건수</td></tr>
+        <tr><td class="brand">슬룸</td><td class="l">ALF 단독 해결 상담 수</td><td><b>1,305</b></td><td class="up">▲ 148</td><td>-</td><td>-</td><td class="note">-</td></tr>
+        <tr><td class="brand">슬룸</td><td class="l">ALF 해결률</td><td><b>92.0%</b></td><td class="dn">▼ 1.0%</td><td>90% 이상</td><td><span class="badge b-ok">달성</span></td><td class="note">-</td></tr>
+        <tr><td class="brand">슬룸</td><td class="l">ALF 처리 비율 (전체 상담 대비)</td><td><b>77.49%</b></td><td class="dn">▼ 0.42%</td><td>71% 이상</td><td><span class="badge b-ok">달성</span></td><td class="note">-</td></tr>
+        <tr><td class="brand">슬룸</td><td class="l">CES (고객 노력 점수)</td><td><b>3.96점</b></td><td class="up">▲ 0.29</td><td>3.6점</td><td><span class="badge b-ok">달성</span></td><td class="note">-</td></tr>
+        <tr><td class="brand">전 브랜드</td><td class="l">CSAT (상담 만족도)</td><td><b>4.12점</b></td><td class="up">▲ 0.19</td><td>4.0점 이상</td><td><span class="badge b-ok">달성</span></td><td class="note">-</td></tr>
+        <tr><td class="brand">전 브랜드</td><td class="l">평균 첫 응답 시간 (FRT)</td><td><b>3분 18초</b></td><td class="dn">▲ 24초</td><td>10분 이내</td><td><span class="badge b-ok">달성</span></td><td class="note">-</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 02-1 상세 운영 지표 -->
+  <div class="tbl-cap"><span class="ic">📊</span> 02-1. 슬룸 콜백 유형별 요청 현황 (Daily)</div>
+  <div class="tbl-wrap">
+    <table class="t">
+      <thead><tr><th>콜백티켓 유형</th><th>9/14 월</th><th>9/15 화</th><th>9/16 수</th><th>9/17 목</th><th>9/18 금</th></tr></thead>
+      <tbody>
+        <tr><td class="l">전화구매</td><td>1</td><td>2</td><td>1</td><td>2</td><td>2</td></tr>
+        <tr><td class="l">주문취소</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td class="l">반품·교환 철회 요청</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td class="l">교환제품_배송일정</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td class="l">반품 환불 일정</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td class="l">오배송·미배송 (배송오류)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td class="l">재회수 요청</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td class="l">취소 후 배송·회수 요청</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr style="font-weight:700;background:#f4f8ff"><td class="l">총 합</td><td>1</td><td>2</td><td>1</td><td>2</td><td>2</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tbl-cap"><span class="ic">📊</span> 전 브랜드 평균 첫 응답 시간 (FRT) <span style="font-weight:500;color:var(--muted);font-size:11px">(First Response Time)</span></div>
+  <div class="tbl-wrap">
+    <table class="t">
+      <thead><tr><th>브랜드</th><th>9/14 월</th><th>9/15 화</th><th>9/16 수</th><th>9/17 목</th><th>9/18 금</th><th>평균 FRT</th></tr></thead>
+      <tbody>
+        <tr><td class="brand">슬룸</td><td>0:03:10</td><td>0:05:13</td><td>0:02:30</td><td>0:02:30</td><td>0:03:41</td><td><b>0:03:25</b></td></tr>
+        <tr><td class="brand">빌바</td><td>0:01:02</td><td>0:00:30</td><td>0:07:46</td><td>0:04:04</td><td>0:01:26</td><td><b>0:02:58</b></td></tr>
+        <tr><td class="brand">얼라인랩</td><td>0:01:47</td><td>0:00:52</td><td>0:02:49</td><td>0:01:34</td><td>0:00:55</td><td><b>0:01:35</b></td></tr>
+        <tr><td class="brand">심플리케어</td><td>-</td><td>-</td><td>0:00:18</td><td>-</td><td>-</td><td><b>0:00:18</b></td></tr>
+        <tr><td class="brand">셀올로지</td><td style="color:#c0392b;font-weight:700">0:21:06</td><td>0:03:15</td><td>-</td><td>0:01:40</td><td>-</td><td><b>0:08:40</b></td></tr>
+        <tr><td class="brand">코코다움</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><b>-</b></td></tr>
+        <tr><td class="brand">12 o'clock</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><b>-</b></td></tr>
+        <tr><td class="brand">닥터맨즈</td><td>-</td><td>-</td><td>-</td><td>0:01:23</td><td>-</td><td><b>0:01:23</b></td></tr>
+        <tr><td class="brand">닥터아망</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><b>-</b></td></tr>
+        <tr><td class="brand">와이브닝</td><td>-</td><td>-</td><td>0:01:48</td><td>-</td><td>-</td><td><b>0:01:48</b></td></tr>
+        <tr><td class="brand">마넬</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><b>-</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tbl-cap"><span class="ic">📊</span> 상위 5개 브랜드별 상담 태그 TOP5 (I/B)</div>
+  <div class="tbl-wrap">
+    <table class="t">
+      <thead><tr><th>브랜드</th><th>상담태그</th><th>총 건수</th><th>전체 I/B 중 비율</th></tr></thead>
+      <tbody>
+        <tr><td class="brand" rowspan="5">슬룸</td><td class="l">불량 / 불량확정</td><td>146</td><td>45.10%</td></tr>
+        <tr><td class="l">불량 / 불량문의</td><td>57</td><td>17.60%</td></tr>
+        <tr><td class="l">반품 / 반품신청</td><td>25</td><td>7.70%</td></tr>
+        <tr><td class="l">기타 / 중복문의</td><td>23</td><td>7.10%</td></tr>
+        <tr><td class="l">100프로환불이벤트 / 문의(리빙전자)</td><td>18</td><td>5.60%</td></tr>
+        <tr><td class="brand" rowspan="5">얼라인랩</td><td class="l">불량 / 불량확정</td><td>33</td><td>50.00%</td></tr>
+        <tr><td class="l">불량 / 불량문의</td><td>12</td><td>18.20%</td></tr>
+        <tr><td class="l">제품 / 사용법</td><td>5</td><td>7.60%</td></tr>
+        <tr><td class="l">교환 / 교환현황확인</td><td>3</td><td>4.50%</td></tr>
+        <tr><td class="l">유상AS / 유상AS안내</td><td>3</td><td>4.50%</td></tr>
+        <tr><td class="brand" rowspan="5">빌바</td><td class="l">무통장입금 / 입금확인요청</td><td>5</td><td>27.80%</td></tr>
+        <tr><td class="l">배송 / 배송일정</td><td>4</td><td>22.20%</td></tr>
+        <tr><td class="l">OB</td><td>3</td><td>16.70%</td></tr>
+        <tr><td class="l">불량 / 불량확정</td><td>3</td><td>16.70%</td></tr>
+        <tr><td class="l">주문 / 주문내역확인</td><td>3</td><td>16.70%</td></tr>
+        <tr><td class="brand" rowspan="5">셀올로지</td><td class="l">부작용 / 부작용환불</td><td>3</td><td>33.30%</td></tr>
+        <tr><td class="l">부작용 / 부작용보상</td><td>2</td><td>22.20%</td></tr>
+        <tr><td class="l">대외문의 / 마케팅,대행사</td><td>2</td><td>22.20%</td></tr>
+        <tr><td class="l">기타 / 무응답</td><td>1</td><td>11.1%</td></tr>
+        <tr><td class="l">주문 / 주문내역확인</td><td>1</td><td>11.1%</td></tr>
+        <tr><td class="brand">심플리케어</td><td class="l">제품 / 가격,주문방법</td><td>1</td><td>100.00%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tbl-cap"><span class="ic">📊</span> 9월 3wk 담당자별 실적 현황 <span style="font-weight:500;color:var(--muted);font-size:11px">(게시판은 개별 집계 불가 · CPD = 합산 ÷ 실근무일 / CPH = 합산 ÷ 실근무시간(총근무−타업무))</span></div>
+  <div class="tbl-wrap">
+    <table class="t">
+      <thead><tr><th>담당자</th><th>근속</th><th style="min-width:220px">담당 브랜드</th><th>평균 CPD</th><th>평균 CPH</th><th>타업무 시간</th><th style="min-width:200px">타업무 상세</th></tr></thead>
+      <tbody>
+        <tr><td class="brand">조건</td><td>16M</td><td class="note">슬룸, 셀올로지(국내), 셀올로지(홍콩), 닥터맨즈, 닥터아망, 와이브닝, 마넬</td><td>105.6</td><td style="color:#c0392b;font-weight:700">19.2</td><td>-</td><td class="note">-</td></tr>
+        <tr><td class="brand">전승리</td><td>14M</td><td class="note">슬룸, 셀올로지(국내), 셀올로지(홍콩), 닥터맨즈, 닥터아망, 와이브닝, 마넬</td><td>95.2</td><td style="color:#c0392b;font-weight:700">17.3</td><td>-</td><td class="note">-</td></tr>
+        <tr><td class="brand">박가영</td><td>12M</td><td class="note">슬룸, 얼라인랩, 빌바, 코코다움, 심플리케어, 마하나</td><td>37.6</td><td>7.4</td><td>-</td><td class="note">-</td></tr>
+        <tr><td class="brand">허윤선</td><td>6M</td><td class="note">슬룸, 얼라인랩, 빌바, 코코다움, 심플리케어, 마하나</td><td>32.0</td><td>5.8</td><td>-</td><td class="note">-</td></tr>
+        <tr><td class="brand">박혜정</td><td>5M</td><td class="note">슬룸, 얼라인랩, 빌바, 코코다움, 심플리케어, 마하나</td><td>0.0</td><td>0.0</td><td>-</td><td class="note">-</td></tr>
+        <tr><td class="brand">김예린 (PT)</td><td>6M</td><td class="note">슬룸</td><td>9.0</td><td>3.0</td><td>-</td><td class="note">-</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 지표 코멘트 -->
+  <div class="card" style="margin-top:22px">
+    <div class="pill-h"><span class="dot"></span>📍 지표 Comment</div>
+    <div class="cmt">
+      <h4>[1] KPI 지표 상세 코멘트</h4>
+      <h5>① CSAT (상담 고객 만족도 점수 · Customer Satisfaction Score)</h5>
+      <ul>
+        <li>이번 주 전 브랜드 CSAT는 <b>4.12점</b>으로 목표치(4.0점 이상)를 달성함.</li>
+        <li>전체 CSAT 응답 중 슬룸 응답이 81건으로 93%를 차지하고 있어, 전 브랜드 CSAT는 여전히 슬룸 지표 흐름에 크게 좌우되는 구조.</li>
+        <li>브랜드별로는 슬룸 4.10점(81건), 셀올로지 5.00점(1건), 얼라인랩 4.00점(5건)으로, 응답이 발생한 전 브랜드가 목표치(4.0점 이상)를 달성함.</li>
+        <li>특히 슬룸은 전주 3.86점 → 금주 <b>4.10점</b>으로 회복하며 목표 구간에 재진입함.</li>
+      </ul>
+
+      <h5>② CES (고객 노력 점수)</h5>
+      <ul>
+        <li>이번 주 CES는 <b>3.96점</b>으로 전주 3.67점 대비 0.29점 상승하며 목표치(3.6점 이상)를 달성함.</li>
+        <li>슬룸 기준 CSAT와 CES가 동반 상승하여, 9월 3주차에는 상담 만족도와 접수 편의성 모두 개선 흐름이 확인됨.</li>
+        <li>특히 9/3부터 적용한 불량 A/S 접수 간소화 이후 불량 유형 CES가 3주 연속 상승하고 있어, 개선 효과가 지표에 반영되기 시작한 것으로 판단됨.</li>
+      </ul>
+
+      <p class="subttl">📌 CSAT · CES 개선 추이 상세 분석</p>
+      <p class="subttl">A. 무응답 상담 종료 프로세스 개선 (8/18~)</p>
+      <ul>
+        <li>CES 1~3점 응답 중 주관식 코멘트에 자동 종료 또는 대기 관련 불만이 포함된 건을 기준으로 추이를 확인함.</li>
+        <li>관련 불만은 8월 5주차 3건 → 9월 1주차 1건 → 9월 2주차 2건 → 9월 3주차 3건으로 나타남.</li>
+        <li>프로세스 변경 직후에는 감소 효과가 확인되었으나, 최근 2주 다시 증가하는 흐름이 나타남.</li>
+        <li>9월 3주차의 경우 FRT 및 상담 진행 중 중간 리드타임이 일부 증가하면서, 고객의 대기시간 체감이 길어진 케이스가 영향을 준 것으로 확인됨.</li>
+      </ul>
+      <p class="arrow">→ 무응답 자동 종료 자체에 대한 불만은 완화되었으나, 현재는 '상담 종료 여부'보다 '상담 중 기다리는 시간'까지 함께 관리할 필요가 있어 추가 추이 확인 예정.</p>
+      <p class="subttl">B. 불량 A/S 접수 간소화 (9/3~)</p>
+      <ul>
+        <li>불량 유형 CES는 9월 1주차 3.74점 → 9월 2주차 3.82점 → 9월 3주차 <b>4.08점</b>으로, 적용 이후 3주 연속 상승함.</li>
+        <li>슬룸 전체 CES 역시 9월 1주차 3.67점 → 9월 2주차 3.67점 → 9월 3주차 <b>3.96점</b>으로 상승하여, 불량 A/S 접수 간소화가 전체 고객 노력도 개선에도 일부 영향을 준 것으로 판단됨.</li>
+        <li>특히 불량 A/S 유형 CES가 4점대를 기록한 것은 접수 단계 축소 이후 고객 체감 편의성이 개선되고 있다는 긍정적인 신호로 판단됨.</li>
+        <li>다만 9월 3주차에도 불량 A/S CES 저점 응답이 11건 잔존하고 있어, 저점 사유를 추가 분석하여 남아 있는 병목을 지속 개선할 필요가 있음.</li>
+      </ul>
+      <p class="arrow">→ 현재까지는 A/S 접수 간소화 이후 명확한 개선 흐름이 확인되고 있으며, 차주에도 동일 추세가 유지되는지 지속 모니터링 예정.</p>
+
+      <h4>[2] 담당자별 실적 상세 코멘트</h4>
+      <h5>① B그룹(조건·전승리) | 홍콩 CS 집중</h5>
+      <ul>
+        <li>국내+홍콩 합산 기준 B그룹의 총 처리량은 <b>1,004건</b>으로, 전주 364건 대비 약 176% 증가함.
+          <br>· 조건 : 528건 / CPD 105.6건
+          <br>· 전승리 : 476건 / CPD 95.2건</li>
+        <li>다만 해당 상승은 개인별 처리 효율의 급격한 개선이라기보다 홍콩 CS 대량 인입에 따른 업무 구조 변화의 영향이 큼.</li>
+        <li>홍콩 전체 CS 1,040건 중 배송 관련 문의가 841건(80.9%)을 차지하여, 금주 B그룹의 높은 처리량은 배송 지연에 따른 대량·반복성 문의가 집중된 결과로 판단됨.</li>
+      </ul>
+      <p class="arrow">→ 담당자 생산성 평가 시 단순 CPD만으로 비교하기보다 국내·홍콩 업무를 분리하여 해석할 필요가 있음.</p>
+      <h5>② A그룹(박가영·허윤선) · 오전 PT(김예린) | 국내 CS 대응</h5>
+      <ul>
+        <li>B그룹이 홍콩 CS에 집중함에 따라 A그룹 및 오전 PT가 국내 실시간 상담과 기타 채널 CS 대응 비중을 확대함.</li>
+        <li>특히 9/14(월) 인입 집중 시에는 운영관리자까지 I/B 상담을 지원하여 국내 상담 공백을 최소화함.</li>
+        <li>홍콩 CS로 일부 정규 리소스가 이동한 상황에서도 국내 실시간 상담 운영은 A그룹 중심으로 안정적으로 유지된 것으로 판단됨.</li>
+      </ul>
+      <h5>③ 타업무 | 전원 0시간</h5>
+      <ul>
+        <li>금주는 홍콩 배송 지연 관련 대량 문의, SCM 운영 이슈 및 국내 CS 분산 대응으로 인해 가용 인력을 상담 업무에 우선 투입함.</li>
+        <li>이에 전원 타업무 수행 시간은 0시간으로 확인됨.</li>
+        <li>단기적으로는 CS 안정화를 위한 선택과 집중으로 판단되나, 해당 상황이 장기화될 경우 운영 개선 과제 및 정기 업무 일정에 영향을 줄 수 있어 홍콩 CS 안정화 이후 정상화 필요.</li>
+      </ul>
+      <h5>④ 홍콩 CS | 주 후반 안정화 흐름 확인</h5>
+      <ul>
+        <li>홍콩 전체 CS는 주중 430건 → 232건 → 166건 → 123건 → 89건으로 지속 감소함.</li>
+        <li>이 중 배송 관련 문의 역시 345건 → 194건 → 139건 → 97건 → 66건으로 동반 감소함.</li>
+        <li>9/14 대비 9/18 기준 전체 CS 인입은 약 79.3% 감소하여, 주 초 발생했던 배송 지연 관련 대량 문의는 주 후반으로 갈수록 안정화되는 흐름이 확인됨.</li>
+        <li>다만 출고 완료 후에도 송장 및 배송정보 반영에 시차가 발생하면서 "현재 배송 상태 확인" 목적의 문의는 일부 지속되고 있음.</li>
+      </ul>
+      <p class="arrow">→ 배송 정상화에 따라 전체 인입은 빠르게 감소하고 있으나, 송장·배송정보 반영 시차로 인한 후속 문의가 완전히 해소될 때까지 추가 모니터링 예정.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 03 Issues -->
+<div class="sec" id="s03">
+  <div class="sec-h"><div class="sec-no">03</div><div class="sec-t">Issues · Escalation</div></div>
+  <div class="done-item">
+    <div class="done-top">
+      <div class="done-idx">1</div>
+      <div class="done-ttl">[셀올로지 홍콩] 사전예약 주문 출고 지연 및 출고 기준 불일치</div>
+      <div class="done-meta"><span>👤 CX팀</span></div>
+      <span class="badge b-no">영향도 상</span>
+      <span class="st st-ing">🟣 진행중</span>
+    </div>
+    <div class="done-body">
+      <div class="blk-t">■ 문제 요약 <span style="font-weight:500;color:var(--muted);font-size:11px">(※ 현재 Risk에 따른 ISSUE 관리 기준상 Orange 등급 이슈)</span></div>
+      <ul>
+        <li><b>① 사전예약 물량 사전 공유 누락</b>
+          <br>· 셀올로지 홍콩 사전예약 주문 예상 물량이 물류사(린코스)에 사전 공유되지 않은 상태에서 약 3,200건의 주문이 한 번에 전송됨.
+          <br>· 이에 물류사에서 즉시 전량 처리가 어려워 출고가 다음 주 초까지 분산되는 상황이 발생함.</li>
+        <li><b>② 주문일 기준 순차 출고 미이행</b>
+          <br>· 미출고 주문이 주문일 기준으로 순차 처리되지 않고 일부 랜덤하게 출고되는 상황이 발생함.
+          <br>· 이로 인해 선주문 고객보다 후주문 고객이 먼저 상품을 수령하는 사례가 발생하여, 고객 불만 및 형평성 이슈로 확대됨.</li>
+        <li><b>③ 공유된 출고 예정일과 실제 출고 일정 불일치</b>
+          <br>· CX팀은 글로벌팀 및 물류사로부터 전달받은 출고 예정일을 기준으로 고객 안내를 진행하였으나, 실제 해당 일정에 출고되지 않는 사례가 반복됨.
+          <br>· 결과적으로 고객에게 안내한 출고 일정의 신뢰도가 낮아지고, 미출고 → 재문의 → 재안내 → 추가 지연의 반복 구조가 발생함.</li>
+      </ul>
+      <div class="blk-t">■ 상세 현황</div>
+      <ul>
+        <li>9월 3주차 홍콩 CS 총 1,040건 중 배송 관련 문의가 841건으로 80.9%를 차지함.</li>
+        <li>일별 전체 CS 및 배송 문의는 아래와 같이 감소 추세가 확인됨.
+          <br>· 전체 CS : 430 → 232 → 166 → 123 → 89건
+          <br>· 배송 문의 : 345 → 194 → 139 → 97 → 66건
+          <br>· 배송 비중 : 80.2% → 83.6% → 83.7% → 78.9% → 74.2%</li>
+        <li>9/14 전체 430건에서 9/18 89건으로 약 79% 감소하여, 주 후반으로 갈수록 배송 지연 관련 인입은 안정화되는 흐름이 확인됨.</li>
+        <li>다만 출고 완료 이후에도 송장 정보 및 배송 상태 반영에 시차가 발생하면서 배송 현황 확인 목적의 문의는 일부 지속됨.</li>
+        <li>또한 안내된 배송 일정이 반복 변경되면서 동일 고객의 재확인 및 추가 문의가 발생해, 단순 신규 문의 외 반복 인입도 전체 CS 증가에 영향을 준 것으로 판단됨.</li>
+      </ul>
+      <div class="blk-t">■ 대응 Action</div>
+      <ul>
+        <li><b>1. SCM·물류사(린코스) ↔ 글로벌팀 ↔ CX팀 사전 공유 및 대응 체계 명확화</b>
+          <br>· VOC 관리의 우선순위는 문제 발생 자체를 예방하는 것이나, 불가피하게 문제가 발생한 경우에는 고객이 불편을 체감하기 전에 사전 안내 및 조치가 이루어질 수 있도록 내부 공유 체계를 명확히 할 필요가 있음.
+          <br>· 사전예약·대량 주문·배송 지연 등 고객 안내에 직접 영향을 주는 특이사항 발생 시 예상 물량, 출고 가능 일정, 지연 여부, 변경 사항을 CX팀까지 사전 공유하는 기준 정립 필요.
+          <br>· 특히 고객에게 이미 안내된 일정이 변경되는 경우에는 CX팀이 고객 문의를 통해 뒤늦게 인지하지 않도록 변경 시점에 즉시 공유하는 프로세스 필요.</li>
+        <li><b>2. 배송 정상화 이후 홍콩 CS 운영 지표 추적</b>
+          <br>· 차주 배송 정상화 이후 홍콩 CS 전체 인입량 및 배송 문의 감소 여부를 지속 확인 예정.
+          <br>· 홍콩 CS 집중으로 크게 상승한 담당자 CPD·CPH가 정상 범위로 회귀하는지 함께 추적하여, 실제 홍콩 상시 운영 시 필요한 적정 리소스를 재확인할 예정.</li>
+        <li><b>3. 셀올로지 홍콩 채널톡 도입 진행</b>
+          <br>· 셀올로지(HK) 채널톡 도입을 위한 견적 산정 진행 중.
+          <br>· 도입 이후 홍콩 CS를 단일 채널에서 관리할 수 있도록 변경하여 운영 효율을 개선할 예정.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 04 VOC -->
+<div class="sec" id="s04">
+  <div class="sec-h"><div class="sec-no">04</div><div class="sec-t">주요 VOC · 고객 인사이트</div></div>
+  <div class="empty"><span class="ico">💬</span>이번 주 별도 공유 사항 없음</div>
+</div>
+
+<!-- 05 Done + Next Week -->
+<div class="sec" id="s05">
+  <div class="sec-h blue"><div class="sec-no">05</div><div class="sec-t">이번 주 완료 사항 (Done) · Next Week Action Items</div></div>
+  <div class="pill-h" style="margin-bottom:12px">✅ Done (이번 주 Action Items)</div>
+  <div class="empty"><span class="ico">🗒️</span>별도로 보고 사항 없음</div>
+  <div class="pill-h" style="margin:22px 0 12px">📅 Next Week (다음 주 주요 업무 Plan · Action Items)</div>
+  <div class="empty"><span class="ico">🗓️</span>별도로 보고 사항 없음</div>
+</div>
+
+<!-- 06 Agenda -->
+<div class="sec" id="s06">
+  <div class="sec-h pur"><div class="sec-no">06</div><div class="sec-t">이번 주 아젠다 · 팀 운영 현황 보고</div></div>
+  <div class="done-item">
+    <div class="done-top">
+      <div class="done-idx">1</div>
+      <div class="done-ttl">[의사결정] CX팀 신규 TO 채용 요청의 건</div>
+      <div class="done-meta"><span>👤 김현지</span></div>
+      <span class="badge b-no">🔴 High</span>
+    </div>
+    <div class="done-body">
+      <div class="blk-t">■ CX팀 인력 현황</div>
+      <div class="tbl-wrap">
+        <table class="t">
+          <thead><tr><th>구분</th><th>직무</th><th>근속</th><th>입사일</th><th>이름</th><th>3M</th><th>6M</th><th>9M</th><th>12M</th><th style="min-width:220px">특이사항 메모</th></tr></thead>
+          <tbody>
+            <tr><td class="brand">파트장</td><td>CX매니저</td><td>31M 30D</td><td>2024-01-23</td><td><b>박근영</b></td><td>2024-04-23</td><td>2024-07-23</td><td>2024-10-23</td><td>2025-01-23</td><td class="note">-</td></tr>
+            <tr><td class="brand">팀원</td><td>CX매니저</td><td>16M 3D</td><td>2025-05-19</td><td><b>조건</b></td><td>2025-08-19</td><td>2025-11-19</td><td>2026-02-19</td><td>2026-05-19</td><td class="note">-</td></tr>
+            <tr><td class="brand">팀원</td><td>CX매니저</td><td>14M 1D</td><td>2025-07-21</td><td><b>전승리</b></td><td>2025-10-21</td><td>2026-01-21</td><td>2026-04-21</td><td>2026-07-21</td><td class="note">* 파트장 승진 여부 내부에서 이후 검증 필요</td></tr>
+            <tr><td class="brand">팀원</td><td>CX매니저</td><td>12M 13D</td><td>2025-09-09</td><td><b>박가영</b></td><td>2025-12-09</td><td>2026-03-09</td><td>2026-06-09</td><td>2026-09-09</td><td class="note">-</td></tr>
+            <tr><td class="brand">팀원</td><td>CX매니저</td><td>6M 30D</td><td>2026-02-23</td><td><b>허윤선</b></td><td>2026-05-23</td><td>2026-08-23</td><td>2026-11-23</td><td>2027-02-23</td><td class="note">-</td></tr>
+            <tr><td class="brand">팀원</td><td>CX매니저</td><td>5M 9D</td><td>2026-04-13</td><td><b>박혜정</b></td><td>2026-07-13</td><td>2026-10-13</td><td>2027-01-13</td><td>2027-04-13</td><td class="note">-</td></tr>
+            <tr><td class="brand" style="border-top:2px solid #3b6ef2;border-left:2px solid #3b6ef2">팀원</td><td style="border-top:2px solid #3b6ef2">CX매니저</td><td style="border-top:2px solid #3b6ef2">-</td><td style="border-top:2px solid #3b6ef2">-</td><td style="border-top:2px solid #3b6ef2"><b>공석</b></td><td style="border-top:2px solid #3b6ef2">-</td><td style="border-top:2px solid #3b6ef2">-</td><td style="border-top:2px solid #3b6ef2">-</td><td style="border-top:2px solid #3b6ef2">-</td><td class="note" style="border-top:2px solid #3b6ef2;border-right:2px solid #3b6ef2;color:#2f5bff;font-weight:700">* 팀장 공석 → 근영님 팀장 대무로 CX매니저 채용 요청</td></tr>
+            <tr><td class="brand" style="border-bottom:2px solid #3b6ef2;border-left:2px solid #3b6ef2">팀원</td><td style="border-bottom:2px solid #3b6ef2">CX매니저</td><td style="border-bottom:2px solid #3b6ef2">-</td><td style="border-bottom:2px solid #3b6ef2">-</td><td style="border-bottom:2px solid #3b6ef2"><b>공석</b></td><td style="border-bottom:2px solid #3b6ef2">-</td><td style="border-bottom:2px solid #3b6ef2">-</td><td style="border-bottom:2px solid #3b6ef2">-</td><td style="border-bottom:2px solid #3b6ef2">-</td><td style="border-bottom:2px solid #3b6ef2;border-right:2px solid #3b6ef2;background:#1a1a1a;color:#fff;font-weight:700">* 5/26~ 공석 유지 (채용 클로징)</td></tr>
+            <tr><td class="brand">팀원</td><td>CS매니저</td><td>-</td><td>-</td><td><b>공석</b></td><td>-</td><td>-</td><td>-</td><td>-</td><td class="note">* 2026-08-24~ [외부몰 CS매니저] 채용 진행 중</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="blk-t">■ 진행 배경</div>
+      <ul>
+        <li>10/26부로 CX팀 팀장 공석이 발생할 예정이며, 이후 팀 운영은 박근영 파트장이 이어서 담당하는 방향으로 논의 중.</li>
+        <li>박근영님이 팀장 역할을 수행하게 될 경우 기존 실무와 운영 병행 담당 인력 1명이 운영·관리 전담 역할로 이동하게 되어, CX매니저 실무 공석이 추가로 발생함.</li>
+        <li>현재 팀은 국내 전 브랜드 CS와 셀올로지 홍콩 CS까지 운영 범위가 확대된 상태로, 팀장 승계 이후 별도 충원 없이 현 인력만으로 운영할 경우 상담 처리 및 개선 과제 수행 여력이 감소할 가능성이 있음.</li>
+      </ul>
+
+      <div class="blk-t">■ 채용 요청</div>
+      <ul>
+        <li><b>포지션</b> : CX매니저(팀원) 1명</li>
+        <li><b>채용 사유</b> : 팀장 공석에 따른 내부 승계로 발생하는 실무 인력 공백 보완</li>
+        <li><b>채용 시점</b> : 연휴 이후 즉시 채용 진행 요청</li>
+        <li><b>목표 합류 시점</b> : 10월 말</li>
+      </ul>
+
+      <div class="blk-t">■ 요청 사유</div>
+      <ul>
+        <li>신규 인력을 사전에 채용하여 원활한 온보딩 기간을 확보하고, 팀장 변경 시점의 운영 리스크를 최소화하고자 함.</li>
+        <li>특히 현재 국내 CS와 홍콩 CS를 병행 운영하고 있어, 단순 상담 인력 보완뿐 아니라 기존 팀원이 운영 관리 역할로 이동한 이후에도 실무 처리량을 유지할 수 있는 최소 인력 확보가 필요함.</li>
+        <li>따라서 10/26 팀장 공석 발생 이후 채용을 시작하기보다, 연휴 이후 즉시 채용을 진행하여 10월 말 합류를 목표로 선제적으로 TO를 확보하는 방향 검토 요청.</li>
+      </ul>
+
+      <div class="blk-t">■ CX팀 자리배치도 변경 예정안 (10/26~)</div>
+      <div class="seatmap">
+        <div class="seatmap-dir">렉 / 출입문 방향</div>
+        <div class="seatmap-cols">
+          <div class="seatmap-col">
+            <div class="seat">박혜정 <span class="seat-chg">(변경)</span></div>
+            <div class="seat">허윤선 <span class="seat-chg">(변경)</span></div>
+            <div class="seat">CX매니저<span class="seat-new">(신규)</span></div>
+            <div class="seat">조건 <span class="seat-keep">(변경없음)</span></div>
+          </div>
+          <div class="seatmap-col">
+            <div class="seat seat-empty">공석</div>
+            <div class="seat">박가영 <span class="seat-chg">(변경)</span></div>
+            <div class="seat">CS매니저<span class="seat-new">(신규)</span></div>
+            <div class="seat">전승리 <span class="seat-chg">(변경)</span></div>
+            <div class="seat">박근영 <span class="seat-chg">(변경)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 `;
 REPORT_HTML['2026-08-w5'] = `
